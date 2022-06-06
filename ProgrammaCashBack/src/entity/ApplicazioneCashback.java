@@ -1,10 +1,35 @@
 package entity;
-//facade
+
+import java.util.ArrayList;
 
 public class ApplicazioneCashback {
 	
-	//????????
-	//classe che funge da interfaccia con il package control
-	//essa deve essere unica
-	//deve istanziare tutto?
+	//façade e singleton
+	
+	private static ApplicazioneCashback instance=null;
+	
+	private ArrayList<Iscrizione> iscrizioni;
+	private ArrayList<Cittadino> cittadini;
+	
+	private ApplicazioneCashback() {
+		//costruttore
+		iscrizioni = new ArrayList<Iscrizione>();
+		cittadini = new ArrayList<Cittadino>();
+	}
+	
+	public static ApplicazioneCashback getInstance() {
+		
+		if(instance==null) {
+			instance = new ApplicazioneCashback();
+		}
+		return instance;
+			
+	}
+	
+	public void registraCittadino() {}
+	public void richiediRimborso() {}
+	public void registraAcquisti() {}
+	private void ricercaProgramma() {}
+	
+	
 }

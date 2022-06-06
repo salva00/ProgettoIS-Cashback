@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-public class DBProgramma {
+public class DBProgrammaCashback {
 
 	private int idProgramma;
 	private Date dataInizio;
@@ -17,11 +17,11 @@ public class DBProgramma {
 	private ArrayList<DBIscrizione> iscrizioni;
 	
 	
-	public DBProgramma() {
+	public DBProgrammaCashback() {
 		this.iscrizioni = new ArrayList<DBIscrizione>(); 
 	}
 	
-	public DBProgramma(int idProgramma) {
+	public DBProgrammaCashback(int idProgramma) {
 		
 		this.idProgramma = idProgramma;
 		this.iscrizioni = new ArrayList<DBIscrizione>(); 
@@ -56,7 +56,7 @@ public class DBProgramma {
 	
 	public void caricaIscrizioniProgrammaDaDB() {
 
-		String query = new String("select * from iscrizione where programma = '"+this.idProgramma+";" );
+		String query = "select * from iscrizione where programma = '"+this.idProgramma+";" ;
 		//System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
 		
 		try {
@@ -81,7 +81,6 @@ public class DBProgramma {
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -91,8 +90,11 @@ public class DBProgramma {
 		
 		int ret = 0;
 		
-		String query ="??"; 
+		String query ="insert into programmi (idProgramma, inizio, fine, aquistiMinimi, tettoMassimo"
+				+ "percentualeRimborso values ("+this.idProgramma+",'"+this.dataInizio+"','"+this.dataFine+"',"
+				+this.minAcquisti+","+this.maxTetto+","+this.percRimborso+";"; 
 		System.out.println(query);
+		
 		try {
 			ret = DBConnectionManager.updateQuery(query);
 			
@@ -106,7 +108,25 @@ public class DBProgramma {
 		return ret;
 	}
 	
-	
+	public int eliminaDaDB() {
+		
+		int ret = 0;
+		
+		String query = "delete from programmi where idProgramma = " + this.idProgramma+";";
+		System.out.println(query);
+		try {
+			
+			ret = DBConnectionManager.updateQuery(query);
+			
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ret = -1; //per segnalare l'error
+		}
+		
+		return ret;
+	}
 	
 	
 	public int getIdProgramma() {

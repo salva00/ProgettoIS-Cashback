@@ -13,7 +13,7 @@ public class DBIscrizione {
 	private ArrayList<DBAcquisto> acquistiRegistrati;
 	private ArrayList<DBCartaDiCredito> carteRegistrate;
 	private DBCittadino cittadino;
-	private DBProgramma programma;
+	private DBProgrammaCashback programma;
 	
 	public DBIscrizione() {
 		acquistiRegistrati = new ArrayList<DBAcquisto>();
@@ -45,8 +45,7 @@ public class DBIscrizione {
 				this.setRimborsoRicevuto(rs.getFloat("RimborsoRicevuto"));
 				this.setIban(rs.getString("Iban"));
 				this.setPassword(rs.getString("Password"));
-				//altre cose??BOH
-				
+							
 			}
 		
 		} catch (ClassNotFoundException | SQLException e) {
@@ -58,7 +57,7 @@ public class DBIscrizione {
 	
 	public void caricaAcquistiIscrizioneDaDB() {
 		
-		String query = new String("select * from acquisti where iscrizione = '"+this.idCittadino+";" );
+		String query = "select * from acquisti where iscrizione = '"+this.idCittadino+";" ;
 		System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
 		
 		try {
@@ -90,9 +89,8 @@ public class DBIscrizione {
 
 	public void caricaCarteRegistrateIscrizioneDaDB() {
 
-			//COME FACCIO LA QUERY????????
 		
-		String query = new String("??");
+		String query =  "select * from carteDiCredito where iscrizione ="+this.idCittadino+";";
 		System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
 		
 		try {
@@ -115,7 +113,8 @@ public class DBIscrizione {
 	}
 	public void caricaProgrammaIscrizioneDaDB() {
 		
-		String query = new String("??" );
+		String query = "select * from programmi where idProgramma in (select programma "
+				+ "from iscrizioni where idCittadino ="+this.idCittadino+";";
 		System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
 		
 		try {
@@ -124,7 +123,7 @@ public class DBIscrizione {
 			
 			if(rs.next()){
 				
-				DBProgramma programma = new DBProgramma();
+				DBProgrammaCashback programma = new DBProgrammaCashback();
 				programma.setDataInizio(rs.getDate("Inizio"));
 				programma.setDataFine(rs.getDate("Fine"));
 				programma.setMinAcquisti(rs.getInt("AcquistiMinimi"));
@@ -146,7 +145,8 @@ public class DBIscrizione {
 
 	public void caricaCittadinoIscrizioneDaDB() {
 		
-		String query = new String("??" );
+		String query ="select * from cittadino where codiceFiscale in (select cittadino "
+				+ "from iscrizioni where idCittadino ="+this.idCittadino+";";
 		System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
 		
 		try {
@@ -176,7 +176,9 @@ public class DBIscrizione {
 		
 		int ret = 0;
 		
-		String query ="??"; 
+		String query ="insert into iscrizioni (idCittadino, Password, Iban, ProgrammaCashback, Cittadino) values ("
+		 +this.idCittadino+",'"+this.password+"','"+this.iban+"',"+this.programma.getIdProgramma()+",'"
+				+this.cittadino.getCodiceFiscale()+"');"; 
 		System.out.println(query);
 		try {
 			ret = DBConnectionManager.updateQuery(query);
@@ -190,6 +192,45 @@ public class DBIscrizione {
 		
 		return ret;
 	}
+	
+	public int aggiornaRimborsoInDB() {
+	
+		int ret = 0;
+		
+		String query ="update iscrizioni set rimborso = "+this.rimborsoRicevuto+" where idCittadino ="+this.idCittadino+";";
+		System.out.println(query);
+		try {
+			ret = DBConnectionManager.updateQuery(query);
+			
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			ret = -1; //per segnalare l'errore di scrittura
+		}
+		
+		return ret;
+	}
+		
+	public int eliminaDaDB() {
+		
+		int ret = 0;
+		
+		String query = "delete from iscrizioni where idCittadino = " + this.idCittadino+";";
+		System.out.println(query);
+		try {
+			
+			ret = DBConnectionManager.updateQuery(query);
+			
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			ret = -1; //per segnalare l'error
+		}
+		
+		return ret;
+	}
+
 	
 	public int getIdCittadino() {
 		return idCittadino;
@@ -233,10 +274,10 @@ public class DBIscrizione {
 	public void setCittadino(DBCittadino cittadino) {
 		this.cittadino = cittadino;
 	}
-	public DBProgramma getProgramma() {
+	public DBProgrammaCashback getProgramma() {
 		return programma;
 	}
-	public void setProgramma(DBProgramma programma) {
+	public void setProgramma(DBProgrammaCashback programma) {
 		this.programma = programma;
 	}
 

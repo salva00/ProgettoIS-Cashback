@@ -3,9 +3,9 @@ package entity;
 import java.util.ArrayList;
 import java.util.Date;
 
-import database.DBProgramma;
+import database.DBProgrammaCashback;
 
-public class EntityProgramma {
+public class ProgrammaCashback {
 	
 	private int idProgramma;
 	private Date dataInizio;
@@ -13,16 +13,16 @@ public class EntityProgramma {
 	private int minAcquisti;
 	private float maxTetto; //se è un float, modificarlo nel CD
 	private float percRimborso;
-	private ArrayList<EntityIscrizione> iscrizioni;
+	private ArrayList<Iscrizione> iscrizioni;
 
-	public EntityProgramma() {
-		iscrizioni = new ArrayList<EntityIscrizione>();
+	public ProgrammaCashback() {
+		iscrizioni = new ArrayList<Iscrizione>();
 	}
 
-	public EntityProgramma(int idProgramma, Date dataInizio, Date dataFine, int minAcquisti, float maxTetto,
-			int percRimborso, ArrayList<EntityIscrizione> iscrizioni) {
+	public ProgrammaCashback(int idProgramma, Date dataInizio, Date dataFine, int minAcquisti, float maxTetto,
+			int percRimborso, ArrayList<Iscrizione> iscrizioni) {
 
-		iscrizioni = new ArrayList<EntityIscrizione>();
+		iscrizioni = new ArrayList<Iscrizione>();
 
 		this.idProgramma = idProgramma;
 		this.dataInizio = dataInizio;
@@ -33,24 +33,24 @@ public class EntityProgramma {
 		this.iscrizioni = iscrizioni;
 	}
 	
-	public EntityProgramma(int idProgramma) {
-		iscrizioni = new ArrayList<EntityIscrizione>();
+	public ProgrammaCashback(int idProgramma) {
+		iscrizioni = new ArrayList<Iscrizione>();
 
 		this.idProgramma=idProgramma;
 		
-		DBProgramma programma = new DBProgramma(idProgramma);
+		DBProgrammaCashback programma = new DBProgrammaCashback(idProgramma);
 		this.dataInizio=programma.getDataInizio();
 		this.dataFine=programma.getDataFine();
 		this.minAcquisti=programma.getMinAcquisti();
 		this.maxTetto=programma.getMaxTetto();
 		this.percRimborso=programma.getPercRimborso();
 		
-		programma.caricaIscrizioniProgrammaDaDB();
-		caricaIscrizioni(programma);
+		//programma.caricaIscrizioniProgrammaDaDB();
+		//caricaIscrizioni(programma);
 	}
 
-	public EntityProgramma(DBProgramma programma ) {
-		iscrizioni = new ArrayList<EntityIscrizione>();
+	public ProgrammaCashback(DBProgrammaCashback programma ) {
+		iscrizioni = new ArrayList<Iscrizione>();
 
 		this.idProgramma=programma.getIdProgramma();
 		this.dataInizio=programma.getDataInizio();
@@ -59,21 +59,31 @@ public class EntityProgramma {
 		this.maxTetto=programma.getMaxTetto();
 		this.percRimborso=programma.getPercRimborso();
 		
-		programma.caricaIscrizioniProgrammaDaDB();
-		caricaIscrizioni(programma);
+		//programma.caricaIscrizioniProgrammaDaDB();
+		//caricaIscrizioni(programma);
 	}
 	
-	public void caricaIscrizioni(DBProgramma programma) {
+	public void caricaIscrizioni(DBProgrammaCashback programma) {
 		
 		for(int i =0; i<programma.getIscrizioni().size(); i++) {
 			
-			EntityIscrizione iscrizione = new EntityIscrizione(programma.getIscrizioni().get(i),this);
+			Iscrizione iscrizione = new Iscrizione(programma.getIscrizioni().get(i),this);
 			programma.getIscrizioni().get(i).caricaAcquistiIscrizioneDaDB();
 			programma.getIscrizioni().get(i).caricaCarteRegistrateIscrizioneDaDB();
 			this.iscrizioni.add(iscrizione);
 			
 			}
 	}
+	
+	public void creaIscrizione() {}
+	
+	public void creaRimborso() {}
+	
+	private void verificaDati() {}
+	
+	private void assegnaRimborso() {}
+	
+	
 	
 	public int getIdProgramma() {
 		return idProgramma;
@@ -123,17 +133,17 @@ public class EntityProgramma {
 		this.percRimborso = percRimborso;
 	}
 
-	public ArrayList<EntityIscrizione> getIscrizioni() {
+	public ArrayList<Iscrizione> getIscrizioni() {
 		return iscrizioni;
 	}
 
-	public void setIscrizioni(ArrayList<EntityIscrizione> iscrizioni) {
+	public void setIscrizioni(ArrayList<Iscrizione> iscrizioni) {
 		this.iscrizioni = iscrizioni;
 	}
 
 	@Override
 	public String toString() {
-		return "EntityProgramma [idProgramma=" + idProgramma + ", dataInizio=" + dataInizio + ", dataFine=" + dataFine
+		return "ProgrammaCashback [idProgramma=" + idProgramma + ", dataInizio=" + dataInizio + ", dataFine=" + dataFine
 				+ ", minAcquisti=" + minAcquisti + ", maxTetto=" + maxTetto + ", percRimborso=" + percRimborso * 100
 				+ "%, iscrizioni=" + iscrizioni + "]";
 	}

@@ -48,7 +48,7 @@ public class DBCittadino {
 	
 	public void caricaIscrizioniCittadinoDaDB() {
 		
-		String query = new String("select * from iscrizioni where cittadino = '"+this.codiceFiscale+";" );//????????
+		String query = "select * from iscrizioni where cittadino = '"+this.codiceFiscale+";" ;
 		System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
 		
 		try {
@@ -78,7 +78,8 @@ public class DBCittadino {
 		
 		int ret = 0;
 		
-		String query ="??"; 
+		String query ="insert into cittadini (nome, cognome, codiceFiscale, indirizzoMail) values('"+this.nome+
+				"','"+this.cognome+"','"+this.codiceFiscale+"','"+this.indirizzoMail+"');";
 		System.out.println(query);
 		try {
 			ret = DBConnectionManager.updateQuery(query);
@@ -93,7 +94,26 @@ public class DBCittadino {
 		return ret;
 	}
 	
-	
+		public int eliminaDaDB() {
+			
+			int ret = 0;
+			
+			String query = "delete from cittadini where codiceFiscale = " + this.codiceFiscale+";";
+			System.out.println(query);
+			try {
+				
+				ret = DBConnectionManager.updateQuery(query);
+				
+				
+			} catch (ClassNotFoundException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				ret = -1; //per segnalare l'error
+			}
+			
+			return ret;
+		}
+		
 	public String getNome() {
 		return nome;
 	}

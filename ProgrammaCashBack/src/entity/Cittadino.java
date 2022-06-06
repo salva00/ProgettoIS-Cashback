@@ -4,22 +4,22 @@ import java.util.ArrayList;
 
 import database.DBCittadino;
 
-public class EntityCittadino {
+public class Cittadino {
 
 	private String nome;
 	private String cognome;
 	private String codiceFiscale;
 	private String indirizzoMail;
-	private ArrayList<EntityIscrizione> iscrizioni;
+	private ArrayList<Iscrizione> iscrizioni;
 	
-	public EntityCittadino() {
-		iscrizioni = new ArrayList<EntityIscrizione>();
+	public Cittadino() {
+		iscrizioni = new ArrayList<Iscrizione>();
 	}
 	
-	public EntityCittadino(String nome, String cognome, String codiceFiscale, String indirizzoMail,
-		ArrayList<EntityIscrizione> iscrizioni) {
+	public Cittadino(String nome, String cognome, String codiceFiscale, String indirizzoMail,
+		ArrayList<Iscrizione> iscrizioni) {
 		
-		iscrizioni = new ArrayList<EntityIscrizione>();
+		iscrizioni = new ArrayList<Iscrizione>();
 		
 		this.nome = nome;
 		this.cognome = cognome;
@@ -28,10 +28,10 @@ public class EntityCittadino {
 		this.iscrizioni = iscrizioni;
 	}
 	
-	public EntityCittadino(String codiceFiscale) {
+	public Cittadino(String codiceFiscale) {
 	
 		this.codiceFiscale = codiceFiscale;
-		iscrizioni = new ArrayList<EntityIscrizione>();
+		iscrizioni = new ArrayList<Iscrizione>();
 		
 		DBCittadino cittadino = new DBCittadino(codiceFiscale);
 		
@@ -45,9 +45,9 @@ public class EntityCittadino {
 		
 	}
 	
-	public EntityCittadino(DBCittadino cittadino) {
+	public Cittadino(DBCittadino cittadino) {
 		
-		iscrizioni = new ArrayList<EntityIscrizione>();
+		iscrizioni = new ArrayList<Iscrizione>();
 		
 		this.codiceFiscale = cittadino.getCodiceFiscale();
 		this.nome=cittadino.getNome();
@@ -63,7 +63,7 @@ public class EntityCittadino {
 		
 		for(int i =0; i<cittadino.getIscrizioni().size(); i++) {
 			
-		EntityIscrizione iscrizione = new EntityIscrizione(cittadino.getIscrizioni().get(i),this);
+		Iscrizione iscrizione = new Iscrizione(cittadino.getIscrizioni().get(i),this);
 		cittadino.getIscrizioni().get(i).caricaAcquistiIscrizioneDaDB();
 		cittadino.getIscrizioni().get(i).caricaCarteRegistrateIscrizioneDaDB();
 		this.iscrizioni.add(iscrizione);
@@ -97,16 +97,16 @@ public class EntityCittadino {
 	public void setIndirizzoMail(String indirizzoMail) {
 		this.indirizzoMail = indirizzoMail;
 	}
-	public ArrayList<EntityIscrizione> getIscrizioni() {
+	public ArrayList<Iscrizione> getIscrizioni() {
 		return iscrizioni;
 	}
-	public void setIscrizioni(ArrayList<EntityIscrizione> iscrizioni) {
+	public void setIscrizioni(ArrayList<Iscrizione> iscrizioni) {
 		this.iscrizioni = iscrizioni;
 	}
 
 	@Override
 	public String toString() {
-		return "EntityCittadino [nome=" + nome + ", cognome=" + cognome + ", codiceFiscale=" + codiceFiscale
+		return "Cittadino [nome=" + nome + ", cognome=" + cognome + ", codiceFiscale=" + codiceFiscale
 				+ ", indirizzoMail=" + indirizzoMail + ", iscrizioni=" + iscrizioni + "]";
 	}
 
