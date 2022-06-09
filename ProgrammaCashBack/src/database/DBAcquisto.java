@@ -37,6 +37,7 @@ public class DBAcquisto {
 			}
 		
 		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -44,7 +45,7 @@ public class DBAcquisto {
 	
 	public void caricaCartaAcquistoDaDB() {
 		
-		String query = "SELECT * FROM carteDiCredito WHERE numero IN(SELECT NumeroCarta FROM acquisti WHERE idAcquisto='"+this.idAcquisto+"');";
+		String query = "SELECT * FROM carteDiCredito WHERE numero IN(SELECT carta FROM acquisti WHERE idAcquisto='"+this.idAcquisto+"');";
 		System.out.println(query); //DEGUB
 		
 		try {
@@ -61,16 +62,16 @@ public class DBAcquisto {
 			}
 		
 		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 		
-	public int SalvaInDB(int idCittadino) {
+	public int SalvaInDB() {
 		
 		int ret = 0;
 		
-		String query ="INSERT INTO Acquisti (idAcquisto, Data, Importo, NumeroCarta, Iscrizione) VALUES ("+this.idAcquisto+","+this.data+ 
-				","+this.importo+","+this.carta.getNumero()+","+idCittadino+"); ";
+		String query ="??"; 
 		System.out.println(query);
 		try {
 			ret = DBConnectionManager.updateQuery(query);
@@ -84,27 +85,6 @@ public class DBAcquisto {
 		
 		return ret;
 	}
-
-	public int eliminaDaDB() {
-		
-		int ret = 0;
-		
-		String query = "delete from acquisti where idAcquisto = " + this.idAcquisto+";";
-		System.out.println(query);
-		try {
-			
-			ret = DBConnectionManager.updateQuery(query);
-			
-			
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			ret = -1; //per segnalare l'error
-		}
-		
-		return ret;
-	}
-	
 	
 	public int getIdAcquisto() {
 		return idAcquisto;

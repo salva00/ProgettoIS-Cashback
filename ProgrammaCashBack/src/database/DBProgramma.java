@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-public class DBProgrammaCashback {
+public class DBProgramma {
 
 	private int idProgramma;
 	private Date dataInizio;
@@ -17,11 +17,11 @@ public class DBProgrammaCashback {
 	private ArrayList<DBIscrizione> iscrizioni;
 	
 	
-	public DBProgrammaCashback() {
+	public DBProgramma() {
 		this.iscrizioni = new ArrayList<DBIscrizione>(); 
 	}
 	
-	public DBProgrammaCashback(int idProgramma) {
+	public DBProgramma(int idProgramma) {
 		
 		this.idProgramma = idProgramma;
 		this.iscrizioni = new ArrayList<DBIscrizione>(); 
@@ -56,7 +56,7 @@ public class DBProgrammaCashback {
 	
 	public void caricaIscrizioniProgrammaDaDB() {
 
-		String query = "select * from iscrizione where programma = '"+this.idProgramma+";" ;
+		String query = new String("select * from iscrizione where programma = '"+this.idProgramma+";" );
 		//System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
 		
 		try {
@@ -81,6 +81,7 @@ public class DBProgrammaCashback {
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -90,11 +91,8 @@ public class DBProgrammaCashback {
 		
 		int ret = 0;
 		
-		String query ="insert into programmi (idProgramma, inizio, fine, aquistiMinimi, tettoMassimo"
-				+ "percentualeRimborso values ("+this.idProgramma+",'"+this.dataInizio+"','"+this.dataFine+"',"
-				+this.minAcquisti+","+this.maxTetto+","+this.percRimborso+";"; 
+		String query ="??"; 
 		System.out.println(query);
-		
 		try {
 			ret = DBConnectionManager.updateQuery(query);
 			
@@ -108,25 +106,7 @@ public class DBProgrammaCashback {
 		return ret;
 	}
 	
-	public int eliminaDaDB() {
-		
-		int ret = 0;
-		
-		String query = "delete from programmi where idProgramma = " + this.idProgramma+";";
-		System.out.println(query);
-		try {
-			
-			ret = DBConnectionManager.updateQuery(query);
-			
-			
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			ret = -1; //per segnalare l'error
-		}
-		
-		return ret;
-	}
+	
 	
 	
 	public int getIdProgramma() {

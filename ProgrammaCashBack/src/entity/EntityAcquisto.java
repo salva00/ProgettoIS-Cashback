@@ -4,21 +4,21 @@ import java.util.Date;
 
 import database.DBAcquisto;
 
-public class Acquisto {
+public class EntityAcquisto {
 
 	private int idAcquisto;
 	private Date data;
 	private float importo;
-	private CartaDiCredito carta;
+	private EntityCartaDiCredito carta;
 	
-	public Acquisto(int idAcquisto, Date data, float importo, CartaDiCredito carta) {
+	public EntityAcquisto(int idAcquisto, Date data, float importo, EntityCartaDiCredito carta) {
 		this.idAcquisto = idAcquisto;
 		this.data = data;
 		this.importo = importo;
 		this.carta = carta;
 	}
 	
-	public Acquisto(int idAcquisto) {
+	public EntityAcquisto(int idAcquisto) {
 		
 		this.idAcquisto = idAcquisto;
 		
@@ -30,7 +30,7 @@ public class Acquisto {
 		caricaCarta(acquisto);
 	}
 	
-	public Acquisto(DBAcquisto acquisto) {
+	public EntityAcquisto(DBAcquisto acquisto) {
 		
 		this.idAcquisto=acquisto.getIdAcquisto();
 		this.data = acquisto.getData();
@@ -42,7 +42,7 @@ public class Acquisto {
 	
 	public void caricaCarta(DBAcquisto acquisto) {
 		
-		CartaDiCredito carta = new CartaDiCredito(acquisto.getCarta());
+		EntityCartaDiCredito carta = new EntityCartaDiCredito(acquisto.getCarta());
 		this.setCarta(carta);
 		
 	}
@@ -66,16 +66,16 @@ public class Acquisto {
 	public void setImporto(float importo) {
 		this.importo = importo;
 	}
-	public CartaDiCredito getCarta() {
+	public EntityCartaDiCredito getCarta() {
 		return carta;
 	}
-	public void setCarta(CartaDiCredito carta) {
+	public void setCarta(EntityCartaDiCredito carta) {
 		this.carta = carta;
 	}
 
 	@Override
 	public String toString() {
-		return "Acquisto [idAcquisto=" + idAcquisto + ", data=" + data + ", importo=" + importo + ", carta="
+		return "EntityAcquisto [idAcquisto=" + idAcquisto + ", data=" + data + ", importo=" + importo + ", carta="
 				+ carta + "]";
 	}
 	

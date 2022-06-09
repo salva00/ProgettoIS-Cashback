@@ -4,24 +4,24 @@ import java.util.ArrayList;
 
 import database.DBIscrizione;
 
-public class Iscrizione {
+public class EntityIscrizione {
 	private int idCittadino;
 	private String password;
 	private String iban;
 	private float rimborsoRicevuto;
-	private ArrayList<Acquisto> acquistiRegistrati;
-	private ArrayList<CartaDiCredito> carteRegistrate;
-	private Cittadino cittadino;
-	private ProgrammaCashback programma;
+	private ArrayList<EntityAcquisto> acquistiRegistrati;
+	private ArrayList<EntityCartaDiCredito> carteRegistrate;
+	private EntityCittadino cittadino;
+	private EntityProgramma programma;
 	
-	public Iscrizione() {
-		acquistiRegistrati = new ArrayList<Acquisto>();
-		carteRegistrate=new ArrayList<CartaDiCredito>();
+	public EntityIscrizione() {
+		acquistiRegistrati = new ArrayList<EntityAcquisto>();
+		carteRegistrate=new ArrayList<EntityCartaDiCredito>();
 	}
 	
-	public Iscrizione(int idCittadino, String password, String iban, float rimborsoRicevuto,
-			ArrayList<Acquisto> acquistiRegistrati, ArrayList<CartaDiCredito> carteRegistrate,
-			Cittadino cittadino, ProgrammaCashback programma) {
+	public EntityIscrizione(int idCittadino, String password, String iban, float rimborsoRicevuto,
+			ArrayList<EntityAcquisto> acquistiRegistrati, ArrayList<EntityCartaDiCredito> carteRegistrate,
+			EntityCittadino cittadino, EntityProgramma programma) {
 		this.idCittadino = idCittadino;
 		this.password = password;
 		this.iban = iban;
@@ -32,10 +32,10 @@ public class Iscrizione {
 		this.programma = programma;
 	}
 	
-	public Iscrizione(int idCittadino) {
+	public EntityIscrizione(int idCittadino) {
 		this.idCittadino=idCittadino;
-		acquistiRegistrati = new ArrayList<Acquisto>();
-		carteRegistrate=new ArrayList<CartaDiCredito>();
+		acquistiRegistrati = new ArrayList<EntityAcquisto>();
+		carteRegistrate=new ArrayList<EntityCartaDiCredito>();
 		
 		DBIscrizione iscrizione=new DBIscrizione(idCittadino);
 	
@@ -54,11 +54,11 @@ public class Iscrizione {
 		
 	}
 	
-	public Iscrizione(DBIscrizione iscrizione) {
+	public EntityIscrizione(DBIscrizione iscrizione) {
 		
 		this.idCittadino=iscrizione.getIdCittadino();
-		acquistiRegistrati = new ArrayList<Acquisto>();
-		carteRegistrate=new ArrayList<CartaDiCredito>();
+		acquistiRegistrati = new ArrayList<EntityAcquisto>();
+		carteRegistrate=new ArrayList<EntityCartaDiCredito>();
 
 		this.iban=iscrizione.getIban();
 		this.password=iscrizione.getPassword();
@@ -74,11 +74,11 @@ public class Iscrizione {
 		caricaCittadino(iscrizione);
 	}
 	
-	public Iscrizione(DBIscrizione iscrizione, Cittadino cittadino) {
+	public EntityIscrizione(DBIscrizione iscrizione, EntityCittadino cittadino) {
 		
 		this.idCittadino=iscrizione.getIdCittadino();
-		acquistiRegistrati = new ArrayList<Acquisto>();
-		carteRegistrate=new ArrayList<CartaDiCredito>();
+		acquistiRegistrati = new ArrayList<EntityAcquisto>();
+		carteRegistrate=new ArrayList<EntityCartaDiCredito>();
 
 		this.iban=iscrizione.getIban();
 		this.password=iscrizione.getPassword();
@@ -94,11 +94,11 @@ public class Iscrizione {
 		caricaProgramma(iscrizione);
 	}
 	
-	public Iscrizione(DBIscrizione iscrizione, ProgrammaCashback programma) {
+	public EntityIscrizione(DBIscrizione iscrizione, EntityProgramma programma) {
 		
 		this.idCittadino=iscrizione.getIdCittadino();
-		acquistiRegistrati = new ArrayList<Acquisto>();
-		carteRegistrate=new ArrayList<CartaDiCredito>();
+		acquistiRegistrati = new ArrayList<EntityAcquisto>();
+		carteRegistrate=new ArrayList<EntityCartaDiCredito>();
 
 		this.iban=iscrizione.getIban();
 		this.password=iscrizione.getPassword();
@@ -118,7 +118,7 @@ public class Iscrizione {
 	public void caricaAcquisti(DBIscrizione iscrizione) {
 		
 		for(int i=0; i<iscrizione.getAcquistiRegistrati().size(); i++) {
-			Acquisto acquisto = new Acquisto(iscrizione.getAcquistiRegistrati().get(i));
+			EntityAcquisto acquisto = new EntityAcquisto(iscrizione.getAcquistiRegistrati().get(i));
 			this.acquistiRegistrati.add(acquisto);
 		}
 		
@@ -127,29 +127,22 @@ public class Iscrizione {
 	public void caricaCarte(DBIscrizione iscrizione) {
 
 		for(int i=0; i<iscrizione.getCarteRegistrate().size(); i++) {
-			CartaDiCredito carta = new CartaDiCredito(iscrizione.getCarteRegistrate().get(i));
+			EntityCartaDiCredito carta = new EntityCartaDiCredito(iscrizione.getCarteRegistrate().get(i));
 			this.carteRegistrate.add(carta);
 		}
 	}
 	
 	public void caricaProgramma(DBIscrizione iscrizione) {
 		
-		ProgrammaCashback programma = new ProgrammaCashback(iscrizione.getProgramma());
+		EntityProgramma programma = new EntityProgramma(iscrizione.getProgramma());
 		this.setProgramma(programma);
 	}
 	
 	public void caricaCittadino(DBIscrizione iscrizione) {
 		
-		Cittadino cittadino = new Cittadino(iscrizione.getCittadino());
+		EntityCittadino cittadino = new EntityCittadino(iscrizione.getCittadino());
 		this.setCittadino(cittadino);
 	}
-	
-	public void aggiungiAcquisto() {}
-	
-	public float calcolaImporto() {
-		return 0;
-	}	
-	
 	
 	public int getIdCittadino() {
 		return idCittadino;
@@ -174,36 +167,35 @@ public class Iscrizione {
 	}
 	public void setRimborsoRicevuto(float rimborsoRicevuto) {
 		this.rimborsoRicevuto = rimborsoRicevuto;
-		
 	}
-	public ArrayList<Acquisto> getAcquistiRegistrati() {
+	public ArrayList<EntityAcquisto> getAcquistiRegistrati() {
 		return acquistiRegistrati;
 	}
-	public void setAcquistiRegistrati(ArrayList<Acquisto> acquistiRegistrati) {
+	public void setAcquistiRegistrati(ArrayList<EntityAcquisto> acquistiRegistrati) {
 		this.acquistiRegistrati = acquistiRegistrati;
 	}
-	public ArrayList<CartaDiCredito> getCarteRegistrate() {
+	public ArrayList<EntityCartaDiCredito> getCarteRegistrate() {
 		return carteRegistrate;
 	}
-	public void setCarteRegistrate(ArrayList<CartaDiCredito> carteRegistrate) {
+	public void setCarteRegistrate(ArrayList<EntityCartaDiCredito> carteRegistrate) {
 		this.carteRegistrate = carteRegistrate;
 	}
-	public Cittadino getCittadino() {
+	public EntityCittadino getCittadino() {
 		return cittadino;
 	}
-	public void setCittadino(Cittadino cittadino) {
+	public void setCittadino(EntityCittadino cittadino) {
 		this.cittadino = cittadino;
 	}
-	public ProgrammaCashback getProgramma() {
+	public EntityProgramma getProgramma() {
 		return programma;
 	}
-	public void setProgramma(ProgrammaCashback programma) {
+	public void setProgramma(EntityProgramma programma) {
 		this.programma = programma;
 	}
 
 	@Override
 	public String toString() {
-		return "Iscrizione [idCittadino=" + idCittadino + ", password=" + password + ", iban=" + iban
+		return "EntityIscrizione [idCittadino=" + idCittadino + ", password=" + password + ", iban=" + iban
 				+ ", rimborsoRicevuto=" + rimborsoRicevuto + ", acquistiRegistrati=" + acquistiRegistrati
 				+ ", carteRegistrate=" + carteRegistrate + ", cittadino=" + cittadino + ", programma=" + programma
 				+ "]";

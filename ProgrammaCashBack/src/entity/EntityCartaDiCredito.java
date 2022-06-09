@@ -2,17 +2,17 @@ package entity;
 
 import database.DBCartaDiCredito;
 
-public class CartaDiCredito {
+public class EntityCartaDiCredito {
 
 	private int numero;
 	private String scadenza;
 	
-	public CartaDiCredito(int numero, String scadenza) {
+	public EntityCartaDiCredito(int numero, String scadenza) {
 		this.numero = numero;
 		this.scadenza = scadenza;
 	}
 	
-	public CartaDiCredito(int numero) {
+	public EntityCartaDiCredito(int numero) {
 		
 		this.numero = numero;
 		
@@ -21,7 +21,7 @@ public class CartaDiCredito {
 	
 	}
 	
-	public CartaDiCredito(DBCartaDiCredito carta) {
+	public EntityCartaDiCredito(DBCartaDiCredito carta) {
 		
 		this.numero=carta.getNumero();
 		this.scadenza=carta.getScadenza();
@@ -46,7 +46,7 @@ public class CartaDiCredito {
 
 	@Override
 	public String toString() {
-		return "CartaDiCredito [numero=" + numero + ", scadenza=" + scadenza + "]";
+		return "EntityCartaDiCredito [numero=" + numero + ", scadenza=" + scadenza + "]";
 	}
 
 	

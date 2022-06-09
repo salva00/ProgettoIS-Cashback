@@ -37,15 +37,12 @@ public class DBCartaDiCredito {
 		
 	}
 	
-	public int SalvaInDB(int idCittadino) {
+	public int SalvaInDB() {
 		
-		//prende in ingresso l'id dell'iscrizione a cui la carta di credito è relativa
 		int ret = 0;
 		
-		String query ="INSERT INTO CarteDiCredito (numero, scadenza, iscrizione) VALUES ("+this.numero+",'"
-		+this.scadenza+"',"+idCittadino+";"; 
+		String query ="??"; 
 		System.out.println(query);
-		
 		try {
 			ret = DBConnectionManager.updateQuery(query);
 			
@@ -54,26 +51,6 @@ public class DBCartaDiCredito {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			ret = -1; //per segnalare l'errore di scrittura
-		}
-		
-		return ret;
-	}
-	
-	public int eliminaDaDB() {
-		
-		int ret = 0;
-		
-		String query = "delete from carteDiCredito where numero = " + this.numero+";";
-		System.out.println(query);
-		try {
-			
-			ret = DBConnectionManager.updateQuery(query);
-			
-			
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			ret = -1; //per segnalare l'error
 		}
 		
 		return ret;
