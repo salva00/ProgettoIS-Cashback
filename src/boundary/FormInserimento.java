@@ -17,7 +17,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
-
 import exceptions.*;
 import javax.swing.ImageIcon;
 
@@ -108,6 +107,9 @@ public class FormInserimento extends JDialog {
 				cittadino.richiediRimborso(
 						Integer.parseInt(textField_IDProgramma.getText()), textField_Cittadino.getText(),textField_Password.getText());
 ;
+				//stampa messaggio di conferma al cittadino
+					JOptionPane.showConfirmDialog(contentPanel, "il rimborso è stato accreditato", "Conferma", JOptionPane.OK_CANCEL_OPTION);
+					
 				}catch(ProgrammaNonTrovato e1){
 					JOptionPane.showMessageDialog(contentPanel, e1.toString(),
 							"Errore", JOptionPane.ERROR_MESSAGE);
