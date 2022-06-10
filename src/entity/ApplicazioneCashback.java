@@ -2,6 +2,9 @@ package entity;
 
 import java.util.ArrayList;
 
+import exceptions.ProgrammaNonTrovato;
+import exceptions.IscrizioneNonTrovata;
+
 public class ApplicazioneCashback {
 	
 	//façade e singleton
@@ -11,7 +14,7 @@ public class ApplicazioneCashback {
 	private ArrayList<Iscrizione> iscrizioni;
 	private ArrayList<Cittadino> cittadini;
 	
-	private ApplicazioneCashback() {
+	protected ApplicazioneCashback() {
 		//costruttore
 		iscrizioni = new ArrayList<Iscrizione>();
 		cittadini = new ArrayList<Cittadino>();
@@ -27,9 +30,17 @@ public class ApplicazioneCashback {
 	}
 	
 	public void registraCittadino() {}
-	public void richiediRimborso() {}
+
 	public void registraAcquisti() {}
-	private void ricercaProgramma() {}
+
+	private ProgrammaCashback ricercaProgramma(int programma) throws ProgrammaNonTrovato{
+		return new ProgrammaCashback(programma);
+	}
 	
+	public void richiediRimborso(String idCittadino, String password, int programma)
+	throws ProgrammaNonTrovato, IscrizioneNonTrovata {
+		ProgrammaCashback ProgCashback = ricercaProgramma(programma);
+		ProgCashback.creaRimborso(idCittadino,password);
+	}
 	
 }

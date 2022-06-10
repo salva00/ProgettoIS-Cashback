@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class DBIscrizione {
 	
-	private int idCittadino;
+	private String idCittadino;
 	private String password;
 	private String iban;
 	private float rimborsoRicevuto;
@@ -20,7 +20,7 @@ public class DBIscrizione {
 		carteRegistrate = new ArrayList<DBCartaDiCredito>();
 	}
 	
-	public DBIscrizione(int idCittadino) {
+	public DBIscrizione(String idCittadino) {
 		
 		this.idCittadino = idCittadino;
 		this.acquistiRegistrati= new ArrayList<DBAcquisto>(); 
@@ -41,7 +41,7 @@ public class DBIscrizione {
 			if(rs.next()) { //se ho un risultato
 				
 				//mi vado a prendere i dati, accedendo tramite il nome dell'attributo-colonna
-				this.setIdCittadino(rs.getInt("IdCittadino"));
+				this.setIdCittadino(rs.getString("IdCittadino"));
 				this.setRimborsoRicevuto(rs.getFloat("RimborsoRicevuto"));
 				this.setIban(rs.getString("Iban"));
 				this.setPassword(rs.getString("Password"));
@@ -232,10 +232,10 @@ public class DBIscrizione {
 	}
 
 	
-	public int getIdCittadino() {
+	public String getIdCittadino() {
 		return idCittadino;
 	}
-	public void setIdCittadino(int idCittadino) {
+	public void setIdCittadino(String idCittadino) {
 		this.idCittadino = idCittadino;
 	}
 	public String getPassword() {
