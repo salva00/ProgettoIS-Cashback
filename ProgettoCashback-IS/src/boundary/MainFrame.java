@@ -6,14 +6,16 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.JEditorPane;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
 import java.awt.Font;
 
 public class MainFrame extends JFrame {
@@ -43,33 +45,33 @@ public class MainFrame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(0, 128, 0));
+		contentPane.setBackground(new Color(30, 144, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btn_Bottone1 = new JButton("Richiedi Rimborso");
-		btn_Bottone1.setFont(new Font("Galvji", Font.PLAIN, 13));
-		btn_Bottone1.setBackground(new Color(0, 102, 0));
-		
-		FormInserimento f = new FormInserimento();
-		
-		btn_Bottone1.addMouseListener(new MouseAdapter() {
+		JButton btnNewButton_1 = new JButton("Richiedi rimborso");
+		btnNewButton_1.setForeground(new Color(30, 144, 255));
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-		f.setVisible(true);
+				new FormInserimento().setVisible(true);
 			}
 		});
-		btn_Bottone1.setForeground(new Color(0, 0, 0));
-		btn_Bottone1.addActionListener(new ActionListener() {
+		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btn_Bottone1.setBounds(123, 119, 190, 43);
-		contentPane.add(btn_Bottone1);
+		btnNewButton_1.setFont(new Font("Arial Hebrew Scholar", Font.PLAIN, 16));
+		btnNewButton_1.setBackground(new Color(30, 144, 255));
+		btnNewButton_1.setBounds(279, 196, 148, 40);
+		contentPane.add(btnNewButton_1);
 		
-		JLabel lblNewLabel = new JLabel("Cashback");
-		lblNewLabel.setBounds(16, 6, 61, 16);
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(MainFrame.class.getResource("/icons/cashback_grande.png")));
+		lblNewLabel.setBounds(18, -12, 348, 278);
 		contentPane.add(lblNewLabel);
+		
+		
 	}
 }
