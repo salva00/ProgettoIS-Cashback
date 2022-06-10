@@ -5,6 +5,7 @@ import java.util.Date;
 
 import database.DBProgrammaCashback;
 import exceptions.ProgrammaNonTrovato;
+import exceptions.IscrizioneNonTrovata;
 
 public class ProgrammaCashback {
 	
@@ -81,14 +82,26 @@ public class ProgrammaCashback {
 	}
 	
 	public void creaIscrizione() {}
-	
-	public void creaRimborso() {}
-	
+
 	private void verificaDati() {}
+
+
+	private void assegnaRimborso(Iscrizione iscrizione) {
+		float importo = iscrizione.calcolaImporto();
+		if (importo > maxTetto) {
+			iscrizione.salvaRimborso(maxTetto);
+		}
+		else{
+			iscrizione.salvaRimborso(importo);
+		}
+	}
+
 	
-	private void assegnaRimborso() {}
-	
-	
+	public void creaRimborso(String idCittadino, String password) throws IscrizioneNonTrovata {
+		verificaDati();
+		Iscrizione iscrizione = new Iscrizione(idCittadino);
+		assegnaRimborso(iscrizione);
+	}
 	
 	public int getIdProgramma() {
 		return idProgramma;

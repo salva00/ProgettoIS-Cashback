@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import database.DBIscrizione;
 
 public class Iscrizione {
-	private int idCittadino;
+	private String idCittadino;
 	private String password;
 	private String iban;
 	private float rimborsoRicevuto;
@@ -19,7 +19,7 @@ public class Iscrizione {
 		carteRegistrate=new ArrayList<CartaDiCredito>();
 	}
 	
-	public Iscrizione(int idCittadino, String password, String iban, float rimborsoRicevuto,
+	public Iscrizione(String idCittadino, String password, String iban, float rimborsoRicevuto,
 			ArrayList<Acquisto> acquistiRegistrati, ArrayList<CartaDiCredito> carteRegistrate,
 			Cittadino cittadino, ProgrammaCashback programma) {
 		this.idCittadino = idCittadino;
@@ -32,7 +32,7 @@ public class Iscrizione {
 		this.programma = programma;
 	}
 	
-	public Iscrizione(int idCittadino) {
+	public Iscrizione(String idCittadino) {
 		this.idCittadino=idCittadino;
 		acquistiRegistrati = new ArrayList<Acquisto>();
 		carteRegistrate=new ArrayList<CartaDiCredito>();
@@ -151,10 +151,10 @@ public class Iscrizione {
 	}	
 	
 	
-	public int getIdCittadino() {
+	public String getIdCittadino() {
 		return idCittadino;
 	}
-	public void setIdCittadino(int idCittadino) {
+	public void setIdCittadino(String idCittadino) {
 		this.idCittadino = idCittadino;
 	}
 	public String getPassword() {
@@ -174,6 +174,13 @@ public class Iscrizione {
 	}
 	public void setRimborsoRicevuto(float rimborsoRicevuto) {
 		this.rimborsoRicevuto = rimborsoRicevuto;
+		
+	}
+	public void salvaRimborso(float rimborsoRicevuto){
+		setRimborsoRicevuto(rimborsoRicevuto);
+		DBIscrizione dbEntry=new DBIscrizione(idCittadino);
+		dbEntry.setRimborsoRicevuto(rimborsoRicevuto);
+		dbEntry.aggiornaRimborsoInDB();
 		
 	}
 	public ArrayList<Acquisto> getAcquistiRegistrati() {
