@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import database.DBIscrizione;
 import exceptions.IscrizioneNonTrovata;
+import exceptions.ProgrammaNonTrovato;
 
 public class Iscrizione {
 	private String idCittadino;
@@ -33,7 +34,7 @@ public class Iscrizione {
 		this.programma = programma;
 	}
 	
-	public Iscrizione(String idCittadino)throws IscrizioneNonTrovata {
+	public Iscrizione(String idCittadino)throws IscrizioneNonTrovata{
 		this.idCittadino=idCittadino;
 		acquistiRegistrati = new ArrayList<Acquisto>();
 		carteRegistrate=new ArrayList<CartaDiCredito>();
@@ -48,8 +49,12 @@ public class Iscrizione {
 		caricaAcquisti(iscrizione);
 		iscrizione.caricaCarteRegistrateIscrizioneDaDB();
 		caricaCarte(iscrizione);
+		try {
 		iscrizione.caricaProgrammaIscrizioneDaDB();
 		caricaProgramma(iscrizione);
+		}catch (ProgrammaNonTrovato e) {
+			e.printStackTrace();
+		}
 		iscrizione.caricaCittadinoIscrizioneDaDB();
 		caricaCittadino(iscrizione);
 		
@@ -70,7 +75,12 @@ public class Iscrizione {
 		iscrizione.caricaCarteRegistrateIscrizioneDaDB();
 		caricaCarte(iscrizione);
 		iscrizione.caricaProgrammaIscrizioneDaDB();
-		caricaProgramma(iscrizione);
+		try {
+			caricaProgramma(iscrizione);
+		} catch (ProgrammaNonTrovato e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		iscrizione.caricaCittadinoIscrizioneDaDB();
 		caricaCittadino(iscrizione);
 	}
@@ -92,7 +102,12 @@ public class Iscrizione {
 		iscrizione.caricaCarteRegistrateIscrizioneDaDB();
 		caricaCarte(iscrizione);
 		iscrizione.caricaProgrammaIscrizioneDaDB();
-		caricaProgramma(iscrizione);
+		try {
+			caricaProgramma(iscrizione);
+		} catch (ProgrammaNonTrovato e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public Iscrizione(DBIscrizione iscrizione, ProgrammaCashback programma) {
@@ -133,7 +148,7 @@ public class Iscrizione {
 		}
 	}
 	
-	public void caricaProgramma(DBIscrizione iscrizione) {
+	public void caricaProgramma(DBIscrizione iscrizione)  throws ProgrammaNonTrovato {
 		
 		ProgrammaCashback programma = new ProgrammaCashback(iscrizione.getProgramma());
 		this.setProgramma(programma);

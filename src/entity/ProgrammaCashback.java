@@ -35,12 +35,11 @@ public class ProgrammaCashback {
 		this.iscrizioni = iscrizioni;
 	}
 	
-	public ProgrammaCashback(int idProgramma) {
+	public ProgrammaCashback(int idProgramma)  throws ProgrammaNonTrovato {
 		iscrizioni = new ArrayList<Iscrizione>();
 
 		this.idProgramma=idProgramma;
 		
-		try{
 			DBProgrammaCashback programma = new DBProgrammaCashback(idProgramma);
 		this.dataInizio=programma.getDataInizio();
 		this.dataFine=programma.getDataFine();
@@ -48,14 +47,11 @@ public class ProgrammaCashback {
 		this.maxTetto=programma.getMaxTetto();
 		this.percRimborso=programma.getPercRimborso();
 		
-		}catch(ProgrammaNonTrovato p) {
-			p.printStackTrace();
-		}
 		//programma.caricaIscrizioniProgrammaDaDB();
 		//caricaIscrizioni(programma);
 	}
 
-	public ProgrammaCashback(DBProgrammaCashback programma ) {
+	public ProgrammaCashback(DBProgrammaCashback programma ) throws ProgrammaNonTrovato{
 		iscrizioni = new ArrayList<Iscrizione>();
 
 		this.idProgramma=programma.getIdProgramma();
