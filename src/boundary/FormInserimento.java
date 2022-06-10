@@ -70,7 +70,7 @@ public class FormInserimento extends JDialog {
 		contentPanel.add(textField_IDProgramma);
 		textField_IDProgramma.setColumns(10);
 		
-		JLabel lblCodiceFiscale = new JLabel("Codice Fiscale");
+		JLabel lblCodiceFiscale = new JLabel("ID Cittadino");
 		lblCodiceFiscale.setFont(new Font("Arial Hebrew Scholar", Font.PLAIN, 15));
 		lblCodiceFiscale.setBackground(new Color(30, 144, 255));
 		lblCodiceFiscale.setBounds(30, 92, 103, 48);
