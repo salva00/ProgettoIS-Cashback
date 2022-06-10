@@ -1,8 +1,11 @@
 package database;
 
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import exceptions.IscrizioneNonTrovata;
 
 public class DBIscrizione {
 	
@@ -20,7 +23,7 @@ public class DBIscrizione {
 		carteRegistrate = new ArrayList<DBCartaDiCredito>();
 	}
 	
-	public DBIscrizione(String idCittadino) {
+	public DBIscrizione(String idCittadino) throws IscrizioneNonTrovata{
 		
 		this.idCittadino = idCittadino;
 		this.acquistiRegistrati= new ArrayList<DBAcquisto>(); 
@@ -29,7 +32,7 @@ public class DBIscrizione {
 	}
 
 	
-	public void caricaDaDB() {
+	public void caricaDaDB() throws IscrizioneNonTrovata{
 		
 		String query = "SELECT * FROM iscrizione WHERE idCittadino='"+this.idCittadino+"';";
 		System.out.println(query); //DEGUB
@@ -46,6 +49,9 @@ public class DBIscrizione {
 				this.setIban(rs.getString("Iban"));
 				this.setPassword(rs.getString("Password"));
 							
+			}
+			else {
+				throw new IscrizioneNonTrovata("Errore: l'ID: "+ String.valueOf(idCittadino)+"Non è corretto");
 			}
 		
 		} catch (ClassNotFoundException | SQLException e) {

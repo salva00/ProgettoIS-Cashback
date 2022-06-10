@@ -3,6 +3,7 @@ package entity;
 import java.util.ArrayList;
 
 import database.DBIscrizione;
+import exceptions.IscrizioneNonTrovata;
 
 public class Iscrizione {
 	private String idCittadino;
@@ -32,7 +33,7 @@ public class Iscrizione {
 		this.programma = programma;
 	}
 	
-	public Iscrizione(String idCittadino) {
+	public Iscrizione(String idCittadino)throws IscrizioneNonTrovata {
 		this.idCittadino=idCittadino;
 		acquistiRegistrati = new ArrayList<Acquisto>();
 		carteRegistrate=new ArrayList<CartaDiCredito>();
@@ -178,9 +179,14 @@ public class Iscrizione {
 	}
 	public void salvaRimborso(float rimborsoRicevuto){
 		setRimborsoRicevuto(rimborsoRicevuto);
+		try {
 		DBIscrizione dbEntry=new DBIscrizione(idCittadino);
+	
 		dbEntry.setRimborsoRicevuto(rimborsoRicevuto);
 		dbEntry.aggiornaRimborsoInDB();
+		}catch(IscrizioneNonTrovata e ) {
+			e.printStackTrace();
+		}
 		
 	}
 	public ArrayList<Acquisto> getAcquistiRegistrati() {

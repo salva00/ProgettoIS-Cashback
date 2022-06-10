@@ -48,7 +48,7 @@ public class DBProgrammaCashback {
 			
 			}
 			else {
-				throw new ProgrammaNonTrovato(String.valueOf(idProgramma));
+				throw new ProgrammaNonTrovato("Errore: l'ID: "+ String.valueOf(idProgramma)+"Non è corretto");
 			}
 		
 		} catch (ClassNotFoundException | SQLException e) {
@@ -70,7 +70,7 @@ public class DBProgrammaCashback {
 				//NB: non dimenticare di istanziare l'oggetto Corso
 				//altrimenti non potremmo salvare i suoi dati				
 				DBIscrizione iscrizione = new DBIscrizione();
-				iscrizione.setIdCittadino(rs.getInt("IdCittadino"));
+				iscrizione.setIdCittadino(rs.getString("IdCittadino"));
 				iscrizione.setIban(rs.getString("Iban"));
 				iscrizione.setPassword(rs.getString("Password"));
 				iscrizione.setRimborsoRicevuto(rs.getFloat("RimborsoRicevuto"));

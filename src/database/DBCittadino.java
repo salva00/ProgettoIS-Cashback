@@ -59,7 +59,7 @@ public class DBCittadino {
 							
 			
 				DBIscrizione iscrizione = new DBIscrizione();
-				iscrizione.setIdCittadino(rs.getInt("idCittadino"));
+				iscrizione.setIdCittadino(rs.getString("idCittadino"));
 				iscrizione.setPassword(rs.getString("Password"));
 				iscrizione.setIban(rs.getString("Iban"));
 				//DEVO CARICARE ANCHE ALTRE COSE? BOH
