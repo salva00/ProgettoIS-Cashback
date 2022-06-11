@@ -14,7 +14,7 @@ public class BCittadino {
 	public void registraAcquisto() {}
 	
 	public void richiediRimborso(int idProgramma, String idCittadino, String password) 
-	throws ProgrammaNonTrovato, IscrizioneNonTrovata {
+	throws ProgrammaNonTrovato, IscrizioneNonTrovata, PasswordErrata, ProgrammaScaduto {
 		
 		GestioneCashback.gestisciRichiediRimborso(idCittadino, password, idProgramma);
 		

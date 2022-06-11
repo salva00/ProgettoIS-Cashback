@@ -5,7 +5,9 @@ import java.util.Date;
 
 import database.DBProgrammaCashback;
 import exceptions.ProgrammaNonTrovato;
+import exceptions.ProgrammaScaduto;
 import exceptions.IscrizioneNonTrovata;
+import exceptions.PasswordErrata;
 
 public class ProgrammaCashback {
 	
@@ -79,7 +81,18 @@ public class ProgrammaCashback {
 	
 	public void creaIscrizione() {}
 
-	private void verificaDati() {}
+	private Iscrizione verificaDati(String idCittadino, String password) throws IscrizioneNonTrovata, PasswordErrata,ProgrammaScaduto{
+		Iscrizione daVerificare = new Iscrizione(idCittadino);
+		if(daVerificare.getPassword()!=password){
+			throw new PasswordErrata("la password inserita non corrisonde al Cittadino con id " + idCittadino);
+		}
+		Date currentDate = new Date();
+		if(dataFine.compareTo(currentDate) < 0){
+			throw new ProgrammaScaduto("il programma è scaduto");
+		}
+		return daVerificare;
+
+	}
 
 
 	private void assegnaRimborso(Iscrizione iscrizione) {
@@ -93,8 +106,8 @@ public class ProgrammaCashback {
 	}
 
 	
-	public void creaRimborso(String idCittadino, String password) throws IscrizioneNonTrovata {
-		verificaDati();
+	public void creaRimborso(String idCittadino, String password) throws IscrizioneNonTrovata,PasswordErrata,ProgrammaScaduto{
+		verificaDati(idCittadino,password);
 		Iscrizione iscrizione = new Iscrizione(idCittadino);
 		assegnaRimborso(iscrizione);
 	}

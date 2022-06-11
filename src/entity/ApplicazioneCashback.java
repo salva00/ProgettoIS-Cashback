@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import exceptions.ProgrammaNonTrovato;
 import exceptions.IscrizioneNonTrovata;
+import exceptions.PasswordErrata;
+import exceptions.ProgrammaScaduto;
 
 public class ApplicazioneCashback {
 	
@@ -34,11 +36,16 @@ public class ApplicazioneCashback {
 	public void registraAcquisti() {}
 
 	private ProgrammaCashback ricercaProgramma(int programma) throws ProgrammaNonTrovato{
-		return new ProgrammaCashback(programma);
+		if( String.valueOf(programma).length() == 6){
+			return new ProgrammaCashback(programma);
+		}
+		else{
+			throw new IllegalArgumentException("Un programma deve avere esattamente 6 cifre");
+		}
 	}
 	
 	public void richiediRimborso(String idCittadino, String password, int programma)
-	throws ProgrammaNonTrovato, IscrizioneNonTrovata {
+	throws ProgrammaNonTrovato, IscrizioneNonTrovata,PasswordErrata,ProgrammaScaduto {
 		ProgrammaCashback ProgCashback = ricercaProgramma(programma);
 		ProgCashback.creaRimborso(idCittadino,password);
 	}
