@@ -106,9 +106,9 @@ public class FormInserimento extends JDialog {
 				
 				cittadino.richiediRimborso(
 						Integer.parseInt(textField_IDProgramma.getText()), textField_Cittadino.getText(),textField_Password.getText());
-
+;
 				//stampa messaggio di conferma al cittadino
-				JOptionPane.showConfirmDialog(contentPanel, "il rimborso è stato accreditato", "Conferma", JOptionPane.OK_CANCEL_OPTION);
+					JOptionPane.showConfirmDialog(contentPanel, "il rimborso è stato accreditato", "Conferma", JOptionPane.OK_CANCEL_OPTION);
 					
 				}catch(ProgrammaNonTrovato e1){
 					JOptionPane.showMessageDialog(contentPanel, e1.toString(),
@@ -116,13 +116,7 @@ public class FormInserimento extends JDialog {
 				}catch(IscrizioneNonTrovata e2) {
 					JOptionPane.showMessageDialog(contentPanel, e2.toString(),
 							"Errore", JOptionPane.ERROR_MESSAGE);
-				}catch(ProgrammaScaduto e3){
-					JOptionPane.showMessageDialog(contentPanel, e3.toString(),
-							"Errore", JOptionPane.ERROR_MESSAGE);
-				}catch(PasswordErrata e4){
-					JOptionPane.showMessageDialog(contentPanel, e4.toString(),
-							"Errore", JOptionPane.ERROR_MESSAGE);
-		
+					}
 				}
 			}
 			
