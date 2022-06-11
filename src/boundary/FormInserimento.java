@@ -114,15 +114,17 @@ public class FormInserimento extends JDialog {
 					}catch(IscrizioneNonTrovata e2) {
 						JOptionPane.showMessageDialog(contentPanel, e2.toString(),
 								"Errore", JOptionPane.ERROR_MESSAGE);
-					}
-					catch(ProgrammaScaduto e3){
+					}catch(ProgrammaNonTerminato e3){
 						JOptionPane.showMessageDialog(contentPanel, e3.toString(),
 								"Errore", JOptionPane.ERROR_MESSAGE);
-					}
-					catch(PasswordErrata e4){
+					}catch(PasswordErrata e4){
 						JOptionPane.showMessageDialog(contentPanel, e4.toString(),
 								"Errore", JOptionPane.ERROR_MESSAGE);
+					}catch(IllegalArgumentException e5) {
+						JOptionPane.showMessageDialog(contentPanel, e5.toString(),
+								"Errore", JOptionPane.ERROR_MESSAGE);
 					}
+				
 				}
 			}
 		});

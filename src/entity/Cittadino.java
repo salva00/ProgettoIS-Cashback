@@ -3,6 +3,7 @@ package entity;
 import java.util.ArrayList;
 
 import database.DBCittadino;
+import exceptions.IscrizioneNonTrovata;
 
 public class Cittadino {
 
@@ -39,10 +40,6 @@ public class Cittadino {
 		this.cognome=cittadino.getCognome();
 		this.indirizzoMail=cittadino.getIndirizzoMail();
 		
-		cittadino.caricaIscrizioniCittadinoDaDB();
-		
-		caricaIscrizioni(cittadino);
-		
 	}
 	
 	public Cittadino(DBCittadino cittadino) {
@@ -54,12 +51,10 @@ public class Cittadino {
 		this.cognome=cittadino.getCognome();
 		this.indirizzoMail=cittadino.getIndirizzoMail();
 		
-		cittadino.caricaIscrizioniCittadinoDaDB();
-		
-		caricaIscrizioni(cittadino);
 	}
 	
-	public void caricaIscrizioni(DBCittadino cittadino) {
+	public void caricaIscrizioni(DBCittadino cittadino) throws IscrizioneNonTrovata { 
+		//nel caso in cui si vogliano caricare dal database tutte le iscrizioni relative ad un cittadino
 		
 		for(int i =0; i<cittadino.getIscrizioni().size(); i++) {
 			

@@ -60,7 +60,7 @@ public class Iscrizione {
 		
 	}
 	
-	public Iscrizione(DBIscrizione iscrizione) {
+	public Iscrizione(DBIscrizione iscrizione) throws IscrizioneNonTrovata{
 		
 		this.idCittadino=iscrizione.getIdCittadino();
 		acquistiRegistrati = new ArrayList<Acquisto>();
@@ -74,18 +74,17 @@ public class Iscrizione {
 		caricaAcquisti(iscrizione);
 		iscrizione.caricaCarteRegistrateIscrizioneDaDB();
 		caricaCarte(iscrizione);
-		iscrizione.caricaProgrammaIscrizioneDaDB();
 		try {
+			iscrizione.caricaProgrammaIscrizioneDaDB();
 			caricaProgramma(iscrizione);
 		} catch (ProgrammaNonTrovato e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		iscrizione.caricaCittadinoIscrizioneDaDB();
 		caricaCittadino(iscrizione);
 	}
 	
-	public Iscrizione(DBIscrizione iscrizione, Cittadino cittadino) {
+	public Iscrizione(DBIscrizione iscrizione, Cittadino cittadino) throws IscrizioneNonTrovata{
 		
 		this.idCittadino=iscrizione.getIdCittadino();
 		acquistiRegistrati = new ArrayList<Acquisto>();
@@ -101,16 +100,15 @@ public class Iscrizione {
 		caricaAcquisti(iscrizione);
 		iscrizione.caricaCarteRegistrateIscrizioneDaDB();
 		caricaCarte(iscrizione);
-		iscrizione.caricaProgrammaIscrizioneDaDB();
 		try {
+			iscrizione.caricaProgrammaIscrizioneDaDB();
 			caricaProgramma(iscrizione);
 		} catch (ProgrammaNonTrovato e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public Iscrizione(DBIscrizione iscrizione, ProgrammaCashback programma) {
+	public Iscrizione(DBIscrizione iscrizione, ProgrammaCashback programma)throws IscrizioneNonTrovata {
 		
 		this.idCittadino=iscrizione.getIdCittadino();
 		acquistiRegistrati = new ArrayList<Acquisto>();
@@ -160,10 +158,16 @@ public class Iscrizione {
 		this.setCittadino(cittadino);
 	}
 	
-	public void aggiungiAcquisto() {}
+	public void aggiungiAcquisto() {} 
 	
 	public float calcolaImporto() {
-		return 0;
+		
+		float totValue=0; 
+		
+		for(Acquisto acq : acquistiRegistrati) {
+			totValue+=acq.getImporto();
+		}
+		return (totValue*this.programma.getPercRimborso());
 	}	
 	
 	
@@ -199,6 +203,7 @@ public class Iscrizione {
 	
 		dbEntry.setRimborsoRicevuto(rimborsoRicevuto);
 		dbEntry.aggiornaRimborsoInDB();
+		
 		}catch(IscrizioneNonTrovata e ) {
 			e.printStackTrace();
 		}

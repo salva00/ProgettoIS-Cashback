@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import exceptions.ProgrammaNonTrovato;
 import exceptions.IscrizioneNonTrovata;
 import exceptions.PasswordErrata;
-import exceptions.ProgrammaScaduto;
+import exceptions.ProgrammaNonTerminato;
 
 public class ApplicazioneCashback {
 	
-	//façade e singleton
+	//ApplicazioneCashback è la classe façade per il nostro package entity
+	//inoltre è dichiarata come Singleton, poichè si vuole imporre che nel sistema ce ne sia una sola istanza
 	
 	private static ApplicazioneCashback instance=null;
 	
@@ -35,17 +36,15 @@ public class ApplicazioneCashback {
 
 	public void registraAcquisti() {}
 
-	private ProgrammaCashback ricercaProgramma(int programma) throws ProgrammaNonTrovato{
-		if( String.valueOf(programma).length() == 6){
-			return new ProgrammaCashback(programma);
+	private ProgrammaCashback ricercaProgramma(int programma) throws ProgrammaNonTrovato, IllegalArgumentException{
+		if( String.valueOf(programma).length() != 6){ //7?
+			throw new IllegalArgumentException("Un programma deve avere esattamente 6 cifre");	
 		}
-		else{
-			throw new IllegalArgumentException("Un programma deve avere esattamente 6 cifre");
-		}
+		return new ProgrammaCashback(programma);
 	}
 	
 	public void richiediRimborso(String idCittadino, String password, int programma)
-	throws ProgrammaNonTrovato, IscrizioneNonTrovata,PasswordErrata,ProgrammaScaduto {
+	throws ProgrammaNonTrovato, IscrizioneNonTrovata,PasswordErrata,ProgrammaNonTerminato, IllegalArgumentException {
 		ProgrammaCashback ProgCashback = ricercaProgramma(programma);
 		ProgCashback.creaRimborso(idCittadino,password);
 	}

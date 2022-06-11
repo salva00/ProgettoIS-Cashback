@@ -5,7 +5,7 @@ import java.util.Date;
 
 import database.DBProgrammaCashback;
 import exceptions.ProgrammaNonTrovato;
-import exceptions.ProgrammaScaduto;
+import exceptions.ProgrammaNonTerminato;
 import exceptions.IscrizioneNonTrovata;
 import exceptions.PasswordErrata;
 
@@ -49,8 +49,6 @@ public class ProgrammaCashback {
 		this.maxTetto=programma.getMaxTetto();
 		this.percRimborso=programma.getPercRimborso();
 		
-		//programma.caricaIscrizioniProgrammaDaDB();
-		//caricaIscrizioni(programma);
 	}
 
 	public ProgrammaCashback(DBProgrammaCashback programma ) throws ProgrammaNonTrovato{
@@ -63,11 +61,11 @@ public class ProgrammaCashback {
 		this.maxTetto=programma.getMaxTetto();
 		this.percRimborso=programma.getPercRimborso();
 		
-		//programma.caricaIscrizioniProgrammaDaDB();
-		//caricaIscrizioni(programma);
 	}
 	
-	public void caricaIscrizioni(DBProgrammaCashback programma) {
+	public void caricaIscrizioni(DBProgrammaCashback programma) throws IscrizioneNonTrovata {
+		
+		//se si volessero caricare dal DB le iscrizioni relative a questo programma
 		
 		for(int i =0; i<programma.getIscrizioni().size(); i++) {
 			
@@ -81,14 +79,28 @@ public class ProgrammaCashback {
 	
 	public void creaIscrizione() {}
 
-	private Iscrizione verificaDati(String idCittadino, String password) throws IscrizioneNonTrovata, PasswordErrata,ProgrammaScaduto{
+	private Iscrizione verificaDati(String idCittadino, String password) 
+			throws IscrizioneNonTrovata, PasswordErrata,ProgrammaNonTerminato, IllegalArgumentException{
+		
+		if(idCittadino.length() != 15){ //16?
+			throw new IllegalArgumentException("L'id del cittadino deve essere una stringa alfanumerica di 15 cifre!");
+		}
+		if (password.length() !=10) {//11?
+			throw new IllegalArgumentException("La password deve essere uns stringa alfanumerica di 10 cifre!");
+		}
+		
 		Iscrizione daVerificare = new Iscrizione(idCittadino);
+		
+		if(daVerificare.getProgramma().getIdProgramma() != idProgramma) { //oppure confronto tra rifermeinti?
+			throw new IscrizioneNonTrovata("i dati inseriti per l'iscrizione non sono relativi a questo programma");
+		}
+		
 		if(daVerificare.getPassword()!=password){
 			throw new PasswordErrata("la password inserita non corrisonde al Cittadino con id " + idCittadino);
 		}
 		Date currentDate = new Date();
-		if(dataFine.compareTo(currentDate) < 0){
-			throw new ProgrammaScaduto("il programma è scaduto");
+		if(dataFine.after(currentDate)){
+			throw new ProgrammaNonTerminato("il programma non è ancora terminato");
 		}
 		return daVerificare;
 
@@ -106,9 +118,10 @@ public class ProgrammaCashback {
 	}
 
 	
-	public void creaRimborso(String idCittadino, String password) throws IscrizioneNonTrovata,PasswordErrata,ProgrammaScaduto{
-		verificaDati(idCittadino,password);
-		Iscrizione iscrizione = new Iscrizione(idCittadino);
+	public void creaRimborso(String idCittadino, String password) 
+			throws IscrizioneNonTrovata,PasswordErrata,ProgrammaNonTerminato,IllegalArgumentException{
+		
+		Iscrizione iscrizione = verificaDati(idCittadino,password); //cambiato anche qui visto che ritorna l'iscrizione
 		assegnaRimborso(iscrizione);
 	}
 	
