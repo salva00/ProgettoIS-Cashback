@@ -104,7 +104,6 @@ public class FormInserimento extends JDialog {
 				BCittadino cittadino = new BCittadino();
 				float rimborsoRicevuto=0;
 				try {
-					System.out.println(Integer.parseInt(textField_IDProgramma.getText()));
 					rimborsoRicevuto = cittadino.richiediRimborso(
 							Integer.parseInt(textField_IDProgramma.getText()), textField_Cittadino.getText(),textField_Password.getText());
 					//stampa messaggio di conferma al cittadino

@@ -47,6 +47,10 @@ public class DBProgrammaCashback {
 				this.setPercRimborso(rs.getInt("PercentualeRimborso"));
 			
 			}
+			
+			else {
+				throw new ProgrammaNonTrovato("Errore: l'ID: "+ String.valueOf(idProgramma)+" non è corretto");
+			}
 		
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
