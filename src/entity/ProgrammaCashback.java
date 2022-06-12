@@ -76,13 +76,21 @@ public class ProgrammaCashback {
 	
 	public void creaIscrizione() {}
 
+	final String IdCittadinoRegEx = "^[a-zA-Z0-9]{15}$";
+	final String PasswordRegEx = "^[a-zA-Z0-9]{10}$";
+
+
+	public static boolean validate(String toValidate, String regEx) {
+		return toValidate != null && toValidate.matches(regEx);
+	}
+
 	private Iscrizione verificaDati(String idCittadino, String password) 
 			throws IscrizioneNonTrovata, PasswordErrata,ProgrammaNonTerminato, MinAcquistiNonRaggiunto, IllegalArgumentException{
 		
-		if(idCittadino.length() != 15){ 
+		if(!validate(idCittadino,IdCittadinoRegEx)){ 
 			throw new IllegalArgumentException("L'id del cittadino deve essere una stringa alfanumerica di 15 cifre!");
 		}
-		if (password.length() !=10) {
+		if (!validate(password,PasswordRegEx)){
 			throw new IllegalArgumentException("La password deve essere uns stringa alfanumerica di 10 cifre!");
 		}
 		
