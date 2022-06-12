@@ -48,7 +48,7 @@ public class DBCittadino {
 	
 	public void caricaIscrizioniCittadinoDaDB() {
 		
-		String query = "select * from iscrizioni where cittadino = '"+this.codiceFiscale+";" ;
+		String query = "select * from iscrizioni where cittadino = '"+this.codiceFiscale+"';" ;
 		System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
 		
 		try {

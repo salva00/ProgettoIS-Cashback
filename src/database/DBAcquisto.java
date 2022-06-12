@@ -54,7 +54,7 @@ public class DBAcquisto {
 			if(rs.next()) { //se ho un risultato
 				
 				DBCartaDiCredito carta = new DBCartaDiCredito();
-				carta.setNumero(rs.getInt("numero"));
+				carta.setNumero(rs.getString("numero"));
 				carta.setScadenza(rs.getString("scadenza"));
 				
 				this.setCarta(carta);

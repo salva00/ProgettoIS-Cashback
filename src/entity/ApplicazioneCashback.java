@@ -35,9 +35,9 @@ public class ApplicazioneCashback {
 
 	private ProgrammaCashback ricercaProgramma(int programma) throws ProgrammaNonTrovato, IllegalArgumentException{
 		
-		if( String.valueOf(programma).length() != 6){ 
-			throw new IllegalArgumentException("Un programma deve avere esattamente 6 cifre");	
-		}
+		if((String.valueOf(programma).length() != 6) || programma<0){ 
+			throw new IllegalArgumentException("Un programma deve essere un intero positivo su 6 cifre");	
+		} 
 		
 		return new ProgrammaCashback(programma);
 	}

@@ -88,11 +88,11 @@ public class ProgrammaCashback {
 		
 		Iscrizione daVerificare = new Iscrizione(idCittadino);
 		
-		if(daVerificare.getProgramma().getIdProgramma() != idProgramma) { //oppure confronto tra rifermeinti?
+		if(Integer.compare(idProgramma, daVerificare.getProgramma().getIdProgramma())==0) {
 			throw new IscrizioneNonTrovata("i dati inseriti per l'iscrizione non sono relativi a questo programma");
 		}
 		
-		if(daVerificare.getPassword()!=password){
+		if(password.compareTo(daVerificare.getPassword())!=0) {
 			throw new PasswordErrata("la password inserita non corrisonde al Cittadino con id " + idCittadino);
 		}
 		Date currentDate = new Date(System.currentTimeMillis());

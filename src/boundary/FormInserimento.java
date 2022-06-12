@@ -28,19 +28,6 @@ public class FormInserimento extends JDialog {
 	private JTextField textField_Password;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			FormInserimento dialog = new FormInserimento();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * Create the dialog.
 	 */
 	public FormInserimento() {

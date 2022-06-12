@@ -5,12 +5,12 @@ import java.sql.SQLException;
 
 public class DBCartaDiCredito {
 
-	private int numero;
+	private String numero;
 	private String scadenza;
 	
 	public DBCartaDiCredito() {}
 	
-	public DBCartaDiCredito(int numero) {
+	public DBCartaDiCredito(String numero) {
 		this.numero= numero;
 		caricaDaDB();
 	}
@@ -81,10 +81,10 @@ public class DBCartaDiCredito {
 	
 	
 	
-	public int getNumero() {
+	public String getNumero() {
 		return numero;
 	}
-	public void setNumero(int numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 	public String getScadenza() {

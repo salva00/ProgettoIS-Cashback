@@ -35,7 +35,7 @@ public class DBIscrizione {
 	
 	public void caricaDaDB() throws IscrizioneNonTrovata{
 		
-		String query = "SELECT * FROM iscrizione WHERE idCittadino='"+this.idCittadino+"';";
+		String query = "SELECT * FROM iscrizioni WHERE idCittadino='"+this.idCittadino+"';";
 		System.out.println(query); //DEGUB
 		
 		try {
@@ -64,7 +64,7 @@ public class DBIscrizione {
 	
 	public void caricaAcquistiIscrizioneDaDB() {
 		
-		String query = "select * from acquisti where iscrizione = '"+this.idCittadino+";" ;
+		String query = "select * from acquisti where iscrizione = '"+this.idCittadino+"';" ;
 		System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
 		
 		try {
@@ -97,7 +97,7 @@ public class DBIscrizione {
 	public void caricaCarteRegistrateIscrizioneDaDB() {
 
 		
-		String query =  "select * from carteDiCredito where iscrizione ="+this.idCittadino+";";
+		String query =  "select * from carteDiCredito where iscrizione ='"+this.idCittadino+"';";
 		System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
 		
 		try {
@@ -106,7 +106,7 @@ public class DBIscrizione {
 			
 			while(rs.next()) {				
 				DBCartaDiCredito carta = new DBCartaDiCredito();
-				carta.setNumero(rs.getInt("Numero"));
+				carta.setNumero(rs.getString("Numero"));
 				carta.setScadenza(rs.getString("Scadenza"));
 				
 				this.carteRegistrate.add(carta);
@@ -121,7 +121,7 @@ public class DBIscrizione {
 	public void caricaProgrammaIscrizioneDaDB() {
 		
 		String query = "select * from programmi where idProgramma in (select programma "
-				+ "from iscrizioni where idCittadino ="+this.idCittadino+";";
+				+ "from iscrizioni where idCittadino ='"+this.idCittadino+"');";
 		System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
 		
 		try {
@@ -131,6 +131,7 @@ public class DBIscrizione {
 			if(rs.next()){
 				
 				DBProgrammaCashback programma = new DBProgrammaCashback();
+				programma.setIdProgramma(rs.getInt("idProgramma"));
 				programma.setDataInizio(rs.getDate("Inizio"));
 				programma.setDataFine(rs.getDate("Fine"));
 				programma.setMinAcquisti(rs.getInt("AcquistiMinimi"));
@@ -152,8 +153,8 @@ public class DBIscrizione {
 
 	public void caricaCittadinoIscrizioneDaDB() {
 		
-		String query ="select * from cittadino where codiceFiscale in (select cittadino "
-				+ "from iscrizioni where idCittadino ="+this.idCittadino+";";
+		String query ="select * from cittadini where codiceFiscale in (select cittadino "
+				+ "from iscrizioni where idCittadino ='"+this.idCittadino+"');";
 		System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
 		
 		try {

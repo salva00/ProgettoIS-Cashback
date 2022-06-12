@@ -4,15 +4,15 @@ import database.DBCartaDiCredito;
 
 public class CartaDiCredito {
 
-	private int numero;
+	private String numero;
 	private String scadenza;
 	
-	public CartaDiCredito(int numero, String scadenza) {
+	public CartaDiCredito(String numero, String scadenza) {
 		this.numero = numero;
 		this.scadenza = scadenza;
 	}
 	
-	public CartaDiCredito(int numero) {
+	public CartaDiCredito(String numero) {
 		
 		this.numero = numero;
 		
@@ -28,11 +28,11 @@ public class CartaDiCredito {
 		
 	}
 
-	public int getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 
