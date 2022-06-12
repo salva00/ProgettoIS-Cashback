@@ -18,7 +18,7 @@ public class DBCartaDiCredito {
 	public void caricaDaDB() {
 		
 		String query = "SELECT * FROM carteDiCredito WHERE numero='"+this.numero+"';";
-		System.out.println(query); //DEGUB
+		//System.out.println(query); //DEGUB
 		
 		try {
 			
@@ -44,7 +44,7 @@ public class DBCartaDiCredito {
 		
 		String query ="INSERT INTO CarteDiCredito (numero, scadenza, iscrizione) VALUES ("+this.numero+",'"
 		+this.scadenza+"',"+idCittadino+";"; 
-		System.out.println(query);
+		//System.out.println(query);
 		
 		try {
 			ret = DBConnectionManager.updateQuery(query);
@@ -64,7 +64,7 @@ public class DBCartaDiCredito {
 		int ret = 0;
 		
 		String query = "delete from carteDiCredito where numero = " + this.numero+";";
-		System.out.println(query);
+		//System.out.println(query);
 		try {
 			
 			ret = DBConnectionManager.updateQuery(query);

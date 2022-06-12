@@ -22,7 +22,7 @@ public class DBAcquisto {
 	public void caricaDaDB() {
 		
 		String query = "SELECT * FROM acquisti WHERE idAcquisto='"+this.idAcquisto+"';";
-		System.out.println(query); //DEGUB
+		//System.out.println(query); //DEGUB
 		
 		try {
 			
@@ -45,7 +45,7 @@ public class DBAcquisto {
 	public void caricaCartaAcquistoDaDB() {
 		
 		String query = "SELECT * FROM carteDiCredito WHERE numero IN(SELECT NumeroCarta FROM acquisti WHERE idAcquisto='"+this.idAcquisto+"');";
-		System.out.println(query); //DEGUB
+		//System.out.println(query); //DEGUB
 		
 		try {
 			
@@ -71,7 +71,7 @@ public class DBAcquisto {
 		
 		String query ="INSERT INTO Acquisti (idAcquisto, Data, Importo, NumeroCarta, Iscrizione) VALUES ("+this.idAcquisto+","+this.data+ 
 				","+this.importo+","+this.carta.getNumero()+","+idCittadino+"); ";
-		System.out.println(query);
+		//System.out.println(query);
 		try {
 			ret = DBConnectionManager.updateQuery(query);
 			
@@ -90,14 +90,13 @@ public class DBAcquisto {
 		int ret = 0;
 		
 		String query = "delete from acquisti where idAcquisto = " + this.idAcquisto+";";
-		System.out.println(query);
+		//System.out.println(query);
 		try {
 			
 			ret = DBConnectionManager.updateQuery(query);
 			
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			ret = -1; //per segnalare l'error
 		}

@@ -31,7 +31,7 @@ public class DBProgrammaCashback {
 	public void caricaDaDB() throws ProgrammaNonTrovato {
 		
 		String query = "SELECT * FROM programmi WHERE idProgramma='"+this.idProgramma+"';";
-		System.out.println(query); //DEGUB
+		//System.out.println(query); //DEGUB
 		
 		try {
 			
@@ -96,7 +96,7 @@ public class DBProgrammaCashback {
 		String query ="insert into programmi (idProgramma, inizio, fine, aquistiMinimi, tettoMassimo"
 				+ "percentualeRimborso values ("+this.idProgramma+",'"+this.dataInizio+"','"+this.dataFine+"',"
 				+this.minAcquisti+","+this.maxTetto+","+this.percRimborso+";"; 
-		System.out.println(query);
+		//System.out.println(query);
 		
 		try {
 			ret = DBConnectionManager.updateQuery(query);
@@ -116,7 +116,7 @@ public class DBProgrammaCashback {
 		int ret = 0;
 		
 		String query = "delete from programmi where idProgramma = " + this.idProgramma+";";
-		System.out.println(query);
+		//System.out.println(query);
 		try {
 			
 			ret = DBConnectionManager.updateQuery(query);

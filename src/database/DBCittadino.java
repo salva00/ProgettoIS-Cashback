@@ -25,7 +25,7 @@ public class DBCittadino {
 	public void caricaDaDB() {
 		
 		String query = "SELECT * FROM cittadini WHERE codiceFiscale='"+this.codiceFiscale+"';";
-		System.out.println(query); //DEGUB
+		//System.out.println(query); //DEGUB
 		
 		try {
 			
@@ -49,7 +49,7 @@ public class DBCittadino {
 	public void caricaIscrizioniCittadinoDaDB() {
 		
 		String query = "select * from iscrizioni where cittadino = '"+this.codiceFiscale+"';" ;
-		System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
+		//System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
 		
 		try {
 			
@@ -80,7 +80,7 @@ public class DBCittadino {
 		
 		String query ="insert into cittadini (nome, cognome, codiceFiscale, indirizzoMail) values('"+this.nome+
 				"','"+this.cognome+"','"+this.codiceFiscale+"','"+this.indirizzoMail+"');";
-		System.out.println(query);
+		//System.out.println(query);
 		try {
 			ret = DBConnectionManager.updateQuery(query);
 			
@@ -99,7 +99,7 @@ public class DBCittadino {
 			int ret = 0;
 			
 			String query = "delete from cittadini where codiceFiscale = " + this.codiceFiscale+";";
-			System.out.println(query);
+			//System.out.println(query);
 			try {
 				
 				ret = DBConnectionManager.updateQuery(query);

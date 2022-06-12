@@ -36,7 +36,7 @@ public class DBIscrizione {
 	public void caricaDaDB() throws IscrizioneNonTrovata{
 		
 		String query = "SELECT * FROM iscrizioni WHERE idCittadino='"+this.idCittadino+"';";
-		System.out.println(query); //DEGUB
+		//System.out.println(query); //DEGUB
 		
 		try {
 			
@@ -65,7 +65,7 @@ public class DBIscrizione {
 	public void caricaAcquistiIscrizioneDaDB() {
 		
 		String query = "select * from acquisti where iscrizione = '"+this.idCittadino+"';" ;
-		System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
+		//System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
 		
 		try {
 			
@@ -95,7 +95,7 @@ public class DBIscrizione {
 
 		
 		String query =  "select * from carteDiCredito where iscrizione ='"+this.idCittadino+"';";
-		System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
+		//System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
 		
 		try {
 			
@@ -119,7 +119,7 @@ public class DBIscrizione {
 		
 		String query = "select * from programmi where idProgramma in (select programma "
 				+ "from iscrizioni where idCittadino ='"+this.idCittadino+"');";
-		System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
+		//System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
 		
 		try {
 			
@@ -151,7 +151,7 @@ public class DBIscrizione {
 	public void caricaCittadinoIscrizioneDaDB() {
 		
 		String query ="select * from cittadini where codiceFiscale in (select cittadino from iscrizioni where idCittadino ='"+this.idCittadino+"');";
-		System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
+		//System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
 		
 		try {
 			
@@ -184,7 +184,7 @@ public class DBIscrizione {
 		String query ="insert into iscrizioni (idCittadino, Password, Iban, ProgrammaCashback, Cittadino) values ("
 		 +this.idCittadino+",'"+this.password+"','"+this.iban+"',"+this.programma.getIdProgramma()+",'"
 				+this.cittadino.getCodiceFiscale()+"');"; 
-		System.out.println(query);
+		//System.out.println(query);
 		try {
 			ret = DBConnectionManager.updateQuery(query);
 			
@@ -203,7 +203,7 @@ public class DBIscrizione {
 		int ret = 0;
 		
 		String query ="update iscrizioni set rimborsoRicevuto = "+this.rimborsoRicevuto+" where idCittadino = '"+this.idCittadino+"';";
-		System.out.println(query);
+		//System.out.println(query);
 		try {
 			ret = DBConnectionManager.updateQuery(query);
 			
@@ -221,7 +221,7 @@ public class DBIscrizione {
 		int ret = 0;
 		
 		String query = "delete from iscrizioni where idCittadino = " + this.idCittadino+";";
-		System.out.println(query);
+		//System.out.println(query);
 		try {
 			
 			ret = DBConnectionManager.updateQuery(query);
