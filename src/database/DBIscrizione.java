@@ -86,7 +86,6 @@ public class DBIscrizione {
 			}
 			
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -153,8 +152,7 @@ public class DBIscrizione {
 
 	public void caricaCittadinoIscrizioneDaDB() {
 		
-		String query ="select * from cittadini where codiceFiscale in (select cittadino "
-				+ "from iscrizioni where idCittadino ='"+this.idCittadino+"');";
+		String query ="select * from cittadini where codiceFiscale in (select cittadino from iscrizioni where idCittadino ='"+this.idCittadino+"');";
 		System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
 		
 		try {
@@ -164,6 +162,7 @@ public class DBIscrizione {
 			if(rs.next()){
 				
 				DBCittadino cittadino = new DBCittadino();
+				cittadino.setCodiceFiscale(rs.getString("CodiceFiscale"));
 				cittadino.setNome(rs.getString("Nome"));
 				cittadino.setCognome(rs.getString("cognome"));
 				cittadino.setIndirizzoMail(rs.getString("IndirizzoMail"));
@@ -205,7 +204,7 @@ public class DBIscrizione {
 	
 		int ret = 0;
 		
-		String query ="update iscrizioni set rimborso = "+this.rimborsoRicevuto+" where idCittadino ="+this.idCittadino+";";
+		String query ="update iscrizioni set rimborsoRicevuto = "+this.rimborsoRicevuto+" where idCittadino = '"+this.idCittadino+"';";
 		System.out.println(query);
 		try {
 			ret = DBConnectionManager.updateQuery(query);
