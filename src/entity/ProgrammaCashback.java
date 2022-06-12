@@ -1,7 +1,7 @@
 package entity;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 import database.DBProgrammaCashback;
 import exceptions.*;
@@ -95,7 +95,7 @@ public class ProgrammaCashback {
 		if(daVerificare.getPassword()!=password){
 			throw new PasswordErrata("la password inserita non corrisonde al Cittadino con id " + idCittadino);
 		}
-		Date currentDate = new Date();
+		Date currentDate = new Date(System.currentTimeMillis());
 		if(dataFine.after(currentDate)){
 			throw new ProgrammaNonTerminato("il programma non è ancora terminato");
 		}

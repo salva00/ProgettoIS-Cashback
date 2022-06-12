@@ -1,7 +1,7 @@
 package entity;
 
 import java.util.ArrayList;
-
+import java.sql.Date;
 import database.DBIscrizione;
 import exceptions.IscrizioneNonTrovata;
 import exceptions.ProgrammaNonTrovato;
@@ -162,10 +162,11 @@ public class Iscrizione {
 	
 	public float calcolaImporto() {
 	
-		float totValue=0; 
-		
+		float totValue=0;
+		Date today = new Date(System.currentTimeMillis());
 		for(Acquisto acq : acquistiRegistrati) {
-			totValue+=acq.getImporto();
+			if(acq.getData().before(today))
+				totValue+=acq.getImporto();
 		}
 		return (totValue*this.programma.getPercRimborso());
 	}	

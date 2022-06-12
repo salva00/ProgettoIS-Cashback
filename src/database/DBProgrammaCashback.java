@@ -3,7 +3,7 @@ package database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import exceptions.ProgrammaNonTrovato;
 
 public class DBProgrammaCashback {
