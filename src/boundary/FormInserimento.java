@@ -12,6 +12,7 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
@@ -25,7 +26,7 @@ public class FormInserimento extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textField_IDProgramma;
 	private JTextField textField_Cittadino;
-	private JTextField textField_Password;
+	private JPasswordField textField_Password;
 
 	/**
 	 * Create the dialog.
@@ -75,10 +76,11 @@ public class FormInserimento extends JDialog {
 		textField_Cittadino.setBounds(165, 98, 160, 26);
 		contentPanel.add(textField_Cittadino);
 		
-		textField_Password = new JTextField();
+		textField_Password = new JPasswordField();
 		textField_Password.setColumns(10);
 		textField_Password.setBackground(new Color(135, 206, 250));
 		textField_Password.setBounds(165, 138, 160, 26);
+		textField_Password.setEchoChar('*');
 		contentPanel.add(textField_Password);
 		
 		JButton btnNewButton = new JButton("richiedi rimborso");

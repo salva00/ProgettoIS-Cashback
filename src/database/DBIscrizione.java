@@ -72,13 +72,11 @@ public class DBIscrizione {
 			ResultSet rs = DBConnectionManager.selectQuery(query);
 			
 			while(rs.next()) {	//while perch� mi aspetto pi� risultati			
-							
-				//NB: non dimenticare di istanziare l'oggetto Corso
-				//altrimenti non potremmo salvare i suoi dati				
+										
 				DBAcquisto acquisto = new DBAcquisto();
 				acquisto.setIdAcquisto(rs.getInt("idAcquisto"));
 				acquisto.setImporto(rs.getFloat("Importo"));
-	
+				acquisto.setData(rs.getDate("Data"));
 				
 				acquisto.caricaCartaAcquistoDaDB();
 				

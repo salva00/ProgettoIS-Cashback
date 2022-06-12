@@ -164,13 +164,19 @@ public class Iscrizione {
 	
 		float totValue=0;
 		Date today = new Date(System.currentTimeMillis());
-		//if(acquistiRegistrati.size()>=programma.getMinAcquisti()) {
-		//for(Acquisto acq : acquistiRegistrati) {
-		//	if(acq.getData().before(today)) 
-		//	totValue+=acq.getImporto();
-		//	}
-		//}
+		if(acquistiRegistrati.size()>=programma.getMinAcquisti()) {
+			for(int i=0; i<acquistiRegistrati.size(); i++) {
+				System.out.println(acquistiRegistrati.get(i));
+				System.out.println(programma.getDataFine());
+
+				if(acquistiRegistrati.get(i).getData().before(programma.getDataFine())){
+				totValue+=acquistiRegistrati.get(i).getImporto();
+				}
+			}
+			
+		}
 		return (totValue*this.programma.getPercRimborso());
+	
 	}	
 	
 	
