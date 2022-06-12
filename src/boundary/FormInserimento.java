@@ -104,6 +104,7 @@ public class FormInserimento extends JDialog {
 				BCittadino cittadino = new BCittadino();
 				float rimborsoRicevuto=0;
 				try {
+					System.out.println(Integer.parseInt(textField_IDProgramma.getText()));
 					rimborsoRicevuto = cittadino.richiediRimborso(
 							Integer.parseInt(textField_IDProgramma.getText()), textField_Cittadino.getText(),textField_Password.getText());
 					//stampa messaggio di conferma al cittadino
@@ -112,21 +113,8 @@ public class FormInserimento extends JDialog {
 					
 						JOptionPane.showConfirmDialog(contentPanel, conferma, "Conferma", JOptionPane.OK_CANCEL_OPTION);
 						
-					}catch(ProgrammaNonTrovato e1){
-						JOptionPane.showMessageDialog(contentPanel, e1.toString(),
-								"Errore", JOptionPane.ERROR_MESSAGE);
-					}catch(IscrizioneNonTrovata e2) {
-						JOptionPane.showMessageDialog(contentPanel, e2.toString(),
-								"Errore", JOptionPane.ERROR_MESSAGE);
-					}catch(ProgrammaNonTerminato e3){
-						JOptionPane.showMessageDialog(contentPanel, e3.toString(),
-								"Errore", JOptionPane.ERROR_MESSAGE);
-					}catch(PasswordErrata e4){
-						JOptionPane.showMessageDialog(contentPanel, e4.toString(),
-								"Errore", JOptionPane.ERROR_MESSAGE);
-					}catch(IllegalArgumentException e5) {
-						JOptionPane.showMessageDialog(contentPanel, e5.toString(),
-								"Errore", JOptionPane.ERROR_MESSAGE);
+					}catch(ProgrammaNonTrovato | MinAcquistiNonRaggiunto | PasswordErrata | IscrizioneNonTrovata| ProgrammaNonTerminato e1){
+						JOptionPane.showMessageDialog(contentPanel, e1.toString(), "Errore", JOptionPane.ERROR_MESSAGE);
 					}
 				
 				}

@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import database.DBProgrammaCashback;
-import exceptions.ProgrammaNonTrovato;
-import exceptions.ProgrammaNonTerminato;
-import exceptions.IscrizioneNonTrovata;
-import exceptions.PasswordErrata;
+import exceptions.*;
 
 public class ProgrammaCashback {
 	
@@ -80,7 +77,7 @@ public class ProgrammaCashback {
 	public void creaIscrizione() {}
 
 	private Iscrizione verificaDati(String idCittadino, String password) 
-			throws IscrizioneNonTrovata, PasswordErrata,ProgrammaNonTerminato, IllegalArgumentException{
+			throws IscrizioneNonTrovata, PasswordErrata,ProgrammaNonTerminato, MinAcquistiNonRaggiunto, IllegalArgumentException{
 		
 		if(idCittadino.length() != 15){ 
 			throw new IllegalArgumentException("L'id del cittadino deve essere una stringa alfanumerica di 15 cifre!");
@@ -102,6 +99,11 @@ public class ProgrammaCashback {
 		if(dataFine.after(currentDate)){
 			throw new ProgrammaNonTerminato("il programma non è ancora terminato");
 		}
+		if(daVerificare.getAcquistiRegistrati().size()<minAcquisti) {
+			throw new MinAcquistiNonRaggiunto("Per richiedere il rimborso è necessario aver effettuato almeno "+
+					minAcquisti + " acquisti.");
+		}
+		
 		return daVerificare;
 
 	}
@@ -122,7 +124,7 @@ public class ProgrammaCashback {
 
 	
 	public float creaRimborso(String idCittadino, String password) 
-			throws IscrizioneNonTrovata,PasswordErrata,ProgrammaNonTerminato,IllegalArgumentException{
+			throws IscrizioneNonTrovata,PasswordErrata,ProgrammaNonTerminato,MinAcquistiNonRaggiunto, IllegalArgumentException{
 		
 		Iscrizione iscrizione = verificaDati(idCittadino,password); 
 		return assegnaRimborso(iscrizione);

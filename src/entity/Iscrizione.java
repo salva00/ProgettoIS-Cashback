@@ -161,7 +161,7 @@ public class Iscrizione {
 	public void aggiungiAcquisto() {} 
 	
 	public float calcolaImporto() {
-		
+	
 		float totValue=0; 
 		
 		for(Acquisto acq : acquistiRegistrati) {

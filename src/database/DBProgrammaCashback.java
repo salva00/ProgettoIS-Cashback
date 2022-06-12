@@ -47,9 +47,6 @@ public class DBProgrammaCashback {
 				this.setPercRimborso(rs.getInt("PercentualeRimborso"));
 			
 			}
-			else {
-				throw new ProgrammaNonTrovato("Errore: l'ID: "+ String.valueOf(idProgramma)+"Non è corretto");
-			}
 		
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
@@ -58,7 +55,7 @@ public class DBProgrammaCashback {
 	
 	public void caricaIscrizioniProgrammaDaDB() {
 
-		String query = "select * from iscrizione where programma = '"+this.idProgramma+";" ;
+		String query = "select * from iscrizioni where programma = '"+this.idProgramma+";" ;
 		//System.out.println(query); //stampo query per controllo in fase di DEBUG, poi posso commentare
 		
 		try {

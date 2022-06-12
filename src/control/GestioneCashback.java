@@ -1,10 +1,7 @@
 package control;
 
 import entity.ApplicazioneCashback;
-import exceptions.ProgrammaNonTrovato;
-import exceptions.ProgrammaNonTerminato;
-import exceptions.IscrizioneNonTrovata;
-import exceptions.PasswordErrata;
+import exceptions.*;
 
 public class GestioneCashback {
 
@@ -17,7 +14,7 @@ public class GestioneCashback {
     }
 	
 	public static float gestisciRichiediRimborso(String idCIttadino, String password, int programma)
-    throws IscrizioneNonTrovata,ProgrammaNonTrovato,PasswordErrata,ProgrammaNonTerminato, IllegalArgumentException
+    throws IscrizioneNonTrovata,ProgrammaNonTrovato,PasswordErrata,ProgrammaNonTerminato, MinAcquistiNonRaggiunto, IllegalArgumentException
     {
         ApplicazioneCashback singleton = ApplicazioneCashback.getInstance();
        return singleton.richiediRimborso(idCIttadino, password, programma);
