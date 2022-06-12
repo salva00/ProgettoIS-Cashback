@@ -86,7 +86,6 @@ public class ProgrammaCashback {
 
 	private Iscrizione verificaDati(String idCittadino, String password) 
 			throws IscrizioneNonTrovata, PasswordErrata,ProgrammaNonTerminato, MinAcquistiNonRaggiunto, IllegalArgumentException{
-		
 		if(!validate(idCittadino,IdCittadinoRegEx)){ 
 			throw new IllegalArgumentException("L'id del cittadino deve essere una stringa alfanumerica di 15 cifre.");
 		}
@@ -101,7 +100,7 @@ public class ProgrammaCashback {
 		}
 		
 		if(password.compareTo(daVerificare.getPassword())!=0) {
-			throw new PasswordErrata("la password inserita non corrisponde al Cittadino con id " + idCittadino);
+			throw new PasswordErrata("la password inserita non corrisponde al Cittadino con id " + idCittadino+".");
 		}
 		Date currentDate = new Date(System.currentTimeMillis());
 		if(dataFine.after(currentDate)){
@@ -110,6 +109,9 @@ public class ProgrammaCashback {
 		if(daVerificare.getAcquistiRegistrati().size()<minAcquisti) {
 			throw new MinAcquistiNonRaggiunto("Per richiedere il rimborso è necessario aver effettuato almeno "+
 					minAcquisti + " acquisti.");
+		}
+		if(daVerificare.getRimborsoRicevuto()!=0) {
+			throw new IscrizioneNonTrovata("Il rimborso per questa iscrizione è gia stato accreditato.");
 		}
 		
 		return daVerificare;
