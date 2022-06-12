@@ -9,7 +9,7 @@ import java.sql.Statement;
 public class DBConnectionManager {
 	
 	public static String url = "jdbc:mysql://localhost:3306/";
-	public static String dbName = "cashback";
+	public static String dbName = "CASHBACK";
 	public static String driver = "com.mysql.cj.jdbc.Driver";
 	public static String userName = "root"; 
 	public static String password = "teamrosso";

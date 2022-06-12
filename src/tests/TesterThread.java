@@ -36,13 +36,14 @@ public class TesterThread extends Thread {
 		try {
 			
 			BCittadino cittadino = new BCittadino();
-			cittadino.richiediRimborso(idProgramma, idCittadino, password);
-			System.out.println("Test ["+ index +"] PASSED.");
+			float rimborso=cittadino.richiediRimborso(idProgramma, idCittadino, password);
+			System.out.println("Test ["+ index +"] completato. Rimborso accreditato: "+rimborso);
+
 			
 			
 		}catch(ProgrammaNonTrovato | MinAcquistiNonRaggiunto | PasswordErrata | 
 				IscrizioneNonTrovata| ProgrammaNonTerminato | IllegalArgumentException  e1){
-			System.out.println("Test ["+ index +"] FAILED. Errore: "+ e1.toString());
+			System.out.println("Test ["+ index +"]. Errore: "+ e1.toString());
 		}
 	}
 	

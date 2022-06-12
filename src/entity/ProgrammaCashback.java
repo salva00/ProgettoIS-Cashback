@@ -88,24 +88,24 @@ public class ProgrammaCashback {
 			throws IscrizioneNonTrovata, PasswordErrata,ProgrammaNonTerminato, MinAcquistiNonRaggiunto, IllegalArgumentException{
 		
 		if(!validate(idCittadino,IdCittadinoRegEx)){ 
-			throw new IllegalArgumentException("L'id del cittadino deve essere una stringa alfanumerica di 15 cifre!");
+			throw new IllegalArgumentException("L'id del cittadino deve essere una stringa alfanumerica di 15 cifre.");
 		}
 		if (!validate(password,PasswordRegEx)){
-			throw new IllegalArgumentException("La password deve essere uns stringa alfanumerica di 10 cifre!");
+			throw new IllegalArgumentException("La password deve essere una stringa alfanumerica di 10 cifre.");
 		}
 		
 		Iscrizione daVerificare = new Iscrizione(idCittadino);
 		
-		if(Integer.compare(idProgramma, daVerificare.getProgramma().getIdProgramma())==0) {
-			throw new IscrizioneNonTrovata("i dati inseriti per l'iscrizione non sono relativi a questo programma");
+		if(Integer.compare(idProgramma, daVerificare.getProgramma().getIdProgramma())!=0) {
+			throw new IscrizioneNonTrovata("i dati inseriti per l'iscrizione non sono relativi a questo programma.");
 		}
 		
 		if(password.compareTo(daVerificare.getPassword())!=0) {
-			throw new PasswordErrata("la password inserita non corrisonde al Cittadino con id " + idCittadino);
+			throw new PasswordErrata("la password inserita non corrisponde al Cittadino con id " + idCittadino);
 		}
 		Date currentDate = new Date(System.currentTimeMillis());
 		if(dataFine.after(currentDate)){
-			throw new ProgrammaNonTerminato("il programma non è ancora terminato");
+			throw new ProgrammaNonTerminato("il programma non è ancora terminato.");
 		}
 		if(daVerificare.getAcquistiRegistrati().size()<minAcquisti) {
 			throw new MinAcquistiNonRaggiunto("Per richiedere il rimborso è necessario aver effettuato almeno "+
