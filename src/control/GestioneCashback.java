@@ -13,11 +13,11 @@ public class GestioneCashback {
 
     }
 	
-	public static float gestisciRichiediRimborso(String idCIttadino, String password, int programma)
+	public static float gestisciRichiediRimborso(String idCittadino, String password, int programma)
     throws IscrizioneNonTrovata,ProgrammaNonTrovato,PasswordErrata,ProgrammaNonTerminato, MinAcquistiNonRaggiunto, IllegalArgumentException
     {
         ApplicazioneCashback singleton = ApplicazioneCashback.getInstance();
-       return singleton.richiediRimborso(idCIttadino, password, programma);
+        return singleton.richiediRimborso(idCittadino, password, programma);
 	}
 	
 	

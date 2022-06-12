@@ -66,7 +66,7 @@ public class FormInserimento extends JDialog {
 		
 		textField_IDProgramma = new JTextField();
 		textField_IDProgramma.setBackground(new Color(135, 206, 250));
-		textField_IDProgramma.setBounds(165, 60, 130, 26);
+		textField_IDProgramma.setBounds(165, 60, 160, 26);
 		contentPanel.add(textField_IDProgramma);
 		textField_IDProgramma.setColumns(10);
 		
@@ -85,13 +85,13 @@ public class FormInserimento extends JDialog {
 		textField_Cittadino = new JTextField();
 		textField_Cittadino.setColumns(10);
 		textField_Cittadino.setBackground(new Color(135, 206, 250));
-		textField_Cittadino.setBounds(165, 98, 130, 26);
+		textField_Cittadino.setBounds(165, 98, 160, 26);
 		contentPanel.add(textField_Cittadino);
 		
 		textField_Password = new JTextField();
 		textField_Password.setColumns(10);
 		textField_Password.setBackground(new Color(135, 206, 250));
-		textField_Password.setBounds(165, 138, 130, 26);
+		textField_Password.setBounds(165, 138, 160, 26);
 		contentPanel.add(textField_Password);
 		
 		JButton btnNewButton = new JButton("richiedi rimborso");
@@ -106,13 +106,14 @@ public class FormInserimento extends JDialog {
 				try {
 					rimborsoRicevuto = cittadino.richiediRimborso(
 							Integer.parseInt(textField_IDProgramma.getText()), textField_Cittadino.getText(),textField_Password.getText());
-					//stampa messaggio di conferma al cittadino
+						//stampa messaggio di conferma al cittadino
 					String conferma = "Alla registrazione con ID:"+textField_Cittadino.getText()+
 							" è stato associato un rimborso di "+rimborsoRicevuto+" euro.";
 					
 						JOptionPane.showConfirmDialog(contentPanel, conferma, "Conferma", JOptionPane.OK_CANCEL_OPTION);
 						
-					}catch(ProgrammaNonTrovato | MinAcquistiNonRaggiunto | PasswordErrata | IscrizioneNonTrovata| ProgrammaNonTerminato e1){
+					}catch(ProgrammaNonTrovato | MinAcquistiNonRaggiunto | PasswordErrata | 
+							IscrizioneNonTrovata| ProgrammaNonTerminato | IllegalArgumentException  e1){
 						JOptionPane.showMessageDialog(contentPanel, e1.toString(), "Errore", JOptionPane.ERROR_MESSAGE);
 					}
 				

@@ -54,7 +54,6 @@ public class MainFrame extends JFrame {
 		JButton btnNewButton_1 = new JButton("Richiedi rimborso");
 		btnNewButton_1.setForeground(new Color(30, 144, 255));
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseClicked(MouseEvent e) {
 				new FormInserimento().setVisible(true);
 			}
