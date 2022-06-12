@@ -102,11 +102,15 @@ public class FormInserimento extends JDialog {
 				if(!textField_IDProgramma.getText().isEmpty() 
 						&& !textField_Cittadino.getText().isEmpty() && !textField_Password.getText().isEmpty()) {
 				BCittadino cittadino = new BCittadino();
+				float rimborsoRicevuto=0;
 				try {
-					cittadino.richiediRimborso(
+					rimborsoRicevuto = cittadino.richiediRimborso(
 							Integer.parseInt(textField_IDProgramma.getText()), textField_Cittadino.getText(),textField_Password.getText());
 					//stampa messaggio di conferma al cittadino
-						JOptionPane.showConfirmDialog(contentPanel, "il rimborso è stato accreditato", "Conferma", JOptionPane.OK_CANCEL_OPTION);
+					String conferma = "Alla registrazione con ID:"+textField_Cittadino.getText()+
+							" è stato associato un rimborso di "+rimborsoRicevuto+" euro.";
+					
+						JOptionPane.showConfirmDialog(contentPanel, conferma, "Conferma", JOptionPane.OK_CANCEL_OPTION);
 						
 					}catch(ProgrammaNonTrovato e1){
 						JOptionPane.showMessageDialog(contentPanel, e1.toString(),

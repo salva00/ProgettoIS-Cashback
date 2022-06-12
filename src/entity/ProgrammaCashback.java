@@ -82,10 +82,10 @@ public class ProgrammaCashback {
 	private Iscrizione verificaDati(String idCittadino, String password) 
 			throws IscrizioneNonTrovata, PasswordErrata,ProgrammaNonTerminato, IllegalArgumentException{
 		
-		if(idCittadino.length() != 15){ //16?
+		if(idCittadino.length() != 15){ 
 			throw new IllegalArgumentException("L'id del cittadino deve essere una stringa alfanumerica di 15 cifre!");
 		}
-		if (password.length() !=10) {//11?
+		if (password.length() !=10) {
 			throw new IllegalArgumentException("La password deve essere uns stringa alfanumerica di 10 cifre!");
 		}
 		
@@ -107,22 +107,25 @@ public class ProgrammaCashback {
 	}
 
 
-	private void assegnaRimborso(Iscrizione iscrizione) {
+	private float assegnaRimborso(Iscrizione iscrizione) {
 		float importo = iscrizione.calcolaImporto();
 		if (importo > maxTetto) {
 			iscrizione.salvaRimborso(maxTetto);
+			return maxTetto;
 		}
 		else{
 			iscrizione.salvaRimborso(importo);
+			return importo;
 		}
+	
 	}
 
 	
-	public void creaRimborso(String idCittadino, String password) 
+	public float creaRimborso(String idCittadino, String password) 
 			throws IscrizioneNonTrovata,PasswordErrata,ProgrammaNonTerminato,IllegalArgumentException{
 		
-		Iscrizione iscrizione = verificaDati(idCittadino,password); //cambiato anche qui visto che ritorna l'iscrizione
-		assegnaRimborso(iscrizione);
+		Iscrizione iscrizione = verificaDati(idCittadino,password); 
+		return assegnaRimborso(iscrizione);
 	}
 	
 	public int getIdProgramma() {

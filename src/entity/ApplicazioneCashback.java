@@ -37,16 +37,16 @@ public class ApplicazioneCashback {
 	public void registraAcquisti() {}
 
 	private ProgrammaCashback ricercaProgramma(int programma) throws ProgrammaNonTrovato, IllegalArgumentException{
-		if( String.valueOf(programma).length() != 6){ //7?
+		if( String.valueOf(programma).length() != 6){ 
 			throw new IllegalArgumentException("Un programma deve avere esattamente 6 cifre");	
 		}
 		return new ProgrammaCashback(programma);
 	}
 	
-	public void richiediRimborso(String idCittadino, String password, int programma)
+	public float richiediRimborso(String idCittadino, String password, int programma)
 	throws ProgrammaNonTrovato, IscrizioneNonTrovata,PasswordErrata,ProgrammaNonTerminato, IllegalArgumentException {
 		ProgrammaCashback ProgCashback = ricercaProgramma(programma);
-		ProgCashback.creaRimborso(idCittadino,password);
+		return ProgCashback.creaRimborso(idCittadino,password);
 	}
 	
 }
