@@ -1,9 +1,13 @@
 package boundary;
 
+import java.io.File;
+import java.io.IOException;
+
 import java.awt.BorderLayout;
-
 import java.awt.EventQueue;
-
+import java.awt.Taskbar;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -31,6 +35,19 @@ public class MainFrame extends JFrame {
 			public void run() {
 				try {
 					MainFrame frame = new MainFrame();
+					//read image
+					String filepath = "resources/icons/cashback_piccolo.png";
+					File file = new File(filepath);
+					BufferedImage bImage;
+					try {
+						bImage = ImageIO.read(file);
+						frame.setIconImage(bImage);
+						final Taskbar taskbar = Taskbar.getTaskbar();
+						taskbar.setIconImage(bImage);
+					} catch (IOException ex) {
+						ex.printStackTrace();
+					}
+
 					frame.setVisible(true);
 					frame.setTitle("Cashback");
 					frame.setResizable(false);
