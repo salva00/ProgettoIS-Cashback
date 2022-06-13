@@ -3,7 +3,7 @@ package control;
 import entity.ApplicazioneCashback;
 import exceptions.*;
 
-public class GestioneCashback {
+public class CGestioneCashback {
 
 	public static void gesticiRegistraCittadino(){
 
