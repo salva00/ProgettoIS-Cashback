@@ -1,6 +1,6 @@
 # ProgettoIS-Cashback
 
-Progetto di "Ingegneria del Software"
+Progetto di "Ingegneria del Software" AA 2021/2022
 
 Realizzato da :
 - Anna Amodio
