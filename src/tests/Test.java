@@ -22,7 +22,7 @@ public class Test {
 		//associata ad una registrazione per cui l'importoCalcolato è maggiore di maxTetto
 		
 		//TEST 3
-		tests[2] = new TesterThread(3, "ABCDEFGHI123456", "qwerty7890", "262022");
+		tests[2] = new TesterThread(3, "HHHHHHH12123456", "56789lmnop", "262022");
 		//programma non ancora terminato
 		
 		//TEST 4

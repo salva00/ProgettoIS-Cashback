@@ -32,6 +32,9 @@ public class FormInserimento extends JDialog {
 	 * Create the dialog.
 	 */
 	public FormInserimento() {
+		this.setVisible(true);
+		this.setTitle("Cashback");
+		this.setResizable(false);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(30, 144, 255));
